@@ -17,9 +17,13 @@ nodes <- newnode(name='Browse Catalogue',
 nodes <- newnode(name= 'Add Study Description in Registry',
                 inputs='Request Access')
 
+## NEEDS ETHICS COMMITTEE PROCESS HERE
+
 nodes <- newnode(name='Review Application',
                  inputs = 'Add Study Description in Registry'
                  )
+
+## INSERT BDM APPROVAL PROCESS HERE
 
 nodes <- newnode(name='Approve Access',
                  inputs = 'Review Application'
