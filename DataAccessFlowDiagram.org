@@ -87,8 +87,72 @@
                    outputs = c('Email Users')
                    )
   
-  #dev.copy2pdf(file='DataAccessFlowDiagram.pdf')
-  #dev.off()
+  nodes <- newnode(name= 'Receive Reminder',
+                   inputs = c('Email Users')
+  
+                   )
+  
+  nodes <- newnode(name= 'Report Status',
+                   inputs = c('Receive Reminder'),
+                   outputs = c('No Change', 'Changed Status')
+                   )
+  
+  
+  nodes <- newnode(name= 'Input Response',
+                   inputs = c('No Change', 'Changed Status'),
+                   outputs = c('Write Report',
+                   'Modify file access record in registry', 'Review Report'))
+  
+  ###########################################################################
+  # newnode End Access
+  nodes <- newnode(name= 'Query Registered End Dates',
+                   inputs = c('Modify file access record in registry'),
+                   outputs = c('Prompt Users'))
+  
+  nodes <- newnode(name= 'Receive Prompt',
+                   inputs = c('Prompt Users')
+                   )
+  
+  nodes <- newnode(name= 'Review Status',
+                   inputs = c('Receive Prompt'),
+                   outputs = c('Project Concluded', 'Project Continuing')
+                   )
+  
+  nodes <- newnode(name= 'Request Extension',
+                   inputs = c('Project Continuing'),
+                   outputs = 'Extend Access Approved'
+                   )
+  
+  nodes <- newnode(name= 'Request Archive Data',
+                   inputs = c('Project Concluded')
+                   )
+  
+  nodes <- newnode(name= 'Prepare Archive Data',
+                   inputs = c('Request Archive Data')
+                   )
+  
+  nodes <- newnode(name= 'Prepare Archive Data',
+                   inputs = c('Request Archive Data')
+                   )
+  
+  nodes <- newnode(name= 'Store Archive Data',
+                   inputs = 'Prepare Archive Data',
+                   outputs = 'Notify User'
+                   )
+  
+  nodes <- newnode(name= 'User Data Archiving',
+                   inputs = 'Notify User',
+                   outputs = c('Destroy Data',
+                   'Store Data and Inform Data Admin of Security')
+                   )
+  
+  nodes <-  newnode(name = 'Record Status',
+                    inputs =
+                    'Store Data and Inform Data Admin of Security'
+                    )
+  
+  dev.copy2pdf(file='DataAccessFlowDiagram.pdf')
+  dev.off()
   
 #+end_src
 
