@@ -75,11 +75,17 @@
   
   nodes <- newnode(name= 'Add File to Registry', newgraph = F,
                    inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
-                   outputs = c('Modify file access record in registry', 'Notify User')
+                   outputs = c('Modify file access record in registry',
+                   'Notify User of Access')
                    )
   
   ###########################################################################
   # newnode Manage Access
+  
+  nodes <- newnode(name= 'List Current Users',
+                   inputs = c('Modify file access record in registry'),
+                   outputs = c('Email Users')
+                   )
   
   #dev.copy2pdf(file='DataAccessFlowDiagram.pdf')
   #dev.off()
