@@ -4,10 +4,11 @@
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [a4paper]
 #+LATEX: \tableofcontents
+#+LATEX_HEADER: \usepackage{pdfpages}
 -----
-
+\clearpage
 * Introduction 
-
+The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 * COMMENT graphviz code
 #+name:flowdiagram
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
@@ -16,17 +17,23 @@
   # REQUIRES THE DISENTANGLE REPO FROM https://github.com/ivanhanigan/disentangle
   # Clone into a tools directory, or change the following line
   source('~/tools/disentangle/src/newnode.r')
-  
+#+end_src
+* Getting Access
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
   # Getting access
+  
   nodes <- newnode(name='Browse Catalogue',
                    inputs = 'Search for Data',
                    outputs = 'Request Access',
                    newgraph = T
                    )
   
+  nodes <- newnode(name= 'Add Study Description in Registry',
+                  inputs='Request Access')
+  
   nodes <- newnode(name='Review Application',
-                   inputs = 'Request Access'
+                   inputs = 'Add Study Description in Registry'
                    )
   
   nodes <- newnode(name='Approve Access',
@@ -34,33 +41,39 @@
   
                    )
   
+  nodes <- newnode(name='Deny Access',
+                   inputs = 'Review Application'
+  
+  )
+  
+  
   
   ###########################################################################
   # Provide data
-  nodes <- newnode(name='Add to Study Description in Registry',
-                   inputs='Review Application',
-                   outputs='Give access to Restricted Server',
-                   )
+  # nodes <- newnode(name='Add to Study Description in Registry',
+  #                  inputs='Request Access',
+  #                  outputs= 'Review Application',
+  #
+  #                  )
   
   # notify approval
   
   nodes <- newnode(name='Notify User of Approval',
                    inputs='Approve Access',
-                   outputs='Add to Study Description in Registry',
+                   outputs='Add Access Record in Registry',
                    )
   
   # or record why not
   
   nodes <- newnode(name='Notify User of Non-approval',
-                   inputs='Approve Access',
-                   outputs='Add to Study Description in Registry',
+                   inputs='Deny Access',
+                   outputs='Note Reason in Study Description in Registry',
                    )
   
   
   
   nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                   inputs = 'Add to Study Description in Registry',
-                   outputs = 'Add accessor record to registry'
+                   inputs = 'Add Access Record in Registry'
                    )
   
   
@@ -74,17 +87,42 @@
                    )
   
   nodes <- newnode(name= 'Add File to Registry', newgraph = F,
-                   inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
-                   outputs = c('Modify file access record in registry',
-                   'Notify User of Access')
-                   )
+                   inputs = c('Store data extract in appropriate location'),
+                   outputs = c('Notify User of Access')
+  )
   
+  nodes <- newnode(name = 'Modify file and access records in registry',
+                   inputs = 'Notify User of Access')
+  
+#+end_src  
+** COMMENT plot nodes
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r  :exports none :eval no   
+    
+  dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
+  dev.off()
+    
+#+end_src
+** Flow Chart of Steps to Get Access
+#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
+\caption{DataAccessFlowDiagram-GettingAccess}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+
+* Managing Access
+** Query Lists of Projects and Users
+This is biannual or annual.
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no 
   ###########################################################################
   # newnode Manage Access
   
   nodes <- newnode(name= 'List Current Users',
                    inputs = c('Modify file access record in registry'),
-                   outputs = c('Email Users')
+                   outputs = c('Email Users'),
+                   newgraph = T
                    )
   
   nodes <- newnode(name= 'Receive Reminder',
@@ -102,7 +140,30 @@
                    inputs = c('No Change', 'Changed Status'),
                    outputs = c('Write Report',
                    'Modify file access record in registry', 'Review Report'))
-  
+#+end_src
+** COMMENT plot nodes
+#+name:plotnodes
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+################################################################
+# name:plotnodes
+    dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
+    dev.off()
+
+#+end_src
+** Flow Chart of Steps to Manage Access
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
+\caption{DataAccessFlowDiagram-ManagingAccess}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
+\end{figure}
+\clearpage
+
+
+* Ending Access
+** Query Lists of Registered End Dates
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no   
   ###########################################################################
   # newnode End Access
   nodes <- newnode(name= 'Query Registered End Dates',
@@ -150,10 +211,17 @@
                     inputs =
                     'Store Data and Inform Data Admin of Security'
                     )
-  
-  dev.copy2pdf(file='DataAccessFlowDiagram.pdf')
-  dev.off()
-  
 #+end_src
 
 * Visualise the Data Access Process
+
+** COMMENT plot nodes
+#+begin_src R :session *R* :tangle no :exports none :eval no   
+
+  source('DataAccessFlowDiagram.r')
+  
+  # NB this needs to be run with edits to the above codes 
+  #dev.copy2pdf(file='DataAccessFlowDiagram-AllNodes.pdf')
+  #dev.off()
+  
+#+end_src

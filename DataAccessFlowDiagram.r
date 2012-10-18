@@ -7,14 +7,18 @@ source('~/tools/disentangle/src/newnode.r')
 
 ###########################################################################
 # Getting access
+
 nodes <- newnode(name='Browse Catalogue',
                  inputs = 'Search for Data',
                  outputs = 'Request Access',
                  newgraph = T
                  )
 
+nodes <- newnode(name= 'Add Study Description in Registry',
+                inputs='Request Access')
+
 nodes <- newnode(name='Review Application',
-                 inputs = 'Request Access'
+                 inputs = 'Add Study Description in Registry'
                  )
 
 nodes <- newnode(name='Approve Access',
@@ -22,33 +26,39 @@ nodes <- newnode(name='Approve Access',
 
                  )
 
+nodes <- newnode(name='Deny Access',
+                 inputs = 'Review Application'
+
+)
+
+
 
 ###########################################################################
 # Provide data
-nodes <- newnode(name='Add to Study Description in Registry',
-                 inputs='Review Application',
-                 outputs='Give access to Restricted Server',
-                 )
+# nodes <- newnode(name='Add to Study Description in Registry',
+#                  inputs='Request Access',
+#                  outputs= 'Review Application',
+#
+#                  )
 
 # notify approval
 
 nodes <- newnode(name='Notify User of Approval',
                  inputs='Approve Access',
-                 outputs='Add to Study Description in Registry',
+                 outputs='Add Access Record in Registry',
                  )
 
 # or record why not
 
 nodes <- newnode(name='Notify User of Non-approval',
-                 inputs='Approve Access',
-                 outputs='Add to Study Description in Registry',
+                 inputs='Deny Access',
+                 outputs='Note Reason in Study Description in Registry',
                  )
 
 
 
 nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                 inputs = 'Add to Study Description in Registry',
-                 outputs = 'Add accessor record to registry'
+                 inputs = 'Add Access Record in Registry'
                  )
 
 
@@ -62,17 +72,23 @@ nodes <- newnode(name= 'Store data extract in appropriate location', newgraph = 
                  )
 
 nodes <- newnode(name= 'Add File to Registry', newgraph = F,
-                 inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
-                 outputs = c('Modify file access record in registry',
-                 'Notify User of Access')
-                 )
+                 inputs = c('Store data extract in appropriate location'),
+                 outputs = c('Notify User of Access')
+)
+
+nodes <- newnode(name = 'Modify file and access records in registry',
+                 inputs = 'Notify User of Access')
+
+dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
+dev.off()
 
 ###########################################################################
 # newnode Manage Access
 
 nodes <- newnode(name= 'List Current Users',
                  inputs = c('Modify file access record in registry'),
-                 outputs = c('Email Users')
+                 outputs = c('Email Users'),
+                 newgraph = T
                  )
 
 nodes <- newnode(name= 'Receive Reminder',
@@ -90,6 +106,11 @@ nodes <- newnode(name= 'Input Response',
                  inputs = c('No Change', 'Changed Status'),
                  outputs = c('Write Report',
                  'Modify file access record in registry', 'Review Report'))
+
+################################################################
+# name:plotnodes
+    dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
+    dev.off()
 
 ###########################################################################
 # newnode End Access
@@ -138,6 +159,3 @@ nodes <-  newnode(name = 'Record Status',
                   inputs =
                   'Store Data and Inform Data Admin of Security'
                   )
-
-dev.copy2pdf(file='DataAccessFlowDiagram.pdf')
-dev.off()
