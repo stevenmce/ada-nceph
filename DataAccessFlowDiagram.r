@@ -68,11 +68,21 @@ nodes <- newnode(name='Extract to Restricted Server', newgraph = F,
 
 nodes <- newnode(name= 'Store data extract in appropriate location', newgraph = F,
                  inputs = c('Extract to Restricted Server'),
-                 outputs = c('CSV', 'Database schema', 'Rstudio user workspace')
+                 outputs = c('Low Risk Data')
                  )
 
-nodes <- newnode(name= 'Add File to Registry', newgraph = F,
-                 inputs = c('Store data extract in appropriate location'),
+nodes <- newnode(name = 'CSV',
+                 inputs = 'Low Risk Data')
+
+nodes <- newnode(name = 'High Risk Data', outputs =
+                 c('Database schema', 'Rstudio user workspace'),
+                 inputs = 'Store data extract in appropriate location'
+                 )
+
+nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+                 inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
+
+
                  outputs = c('Notify User of Access')
 )
 
@@ -115,47 +125,71 @@ nodes <- newnode(name= 'Input Response',
 ###########################################################################
 # newnode End Access
 nodes <- newnode(name= 'Query Registered End Dates',
-                 inputs = c('Modify file access record in registry'),
-                 outputs = c('Prompt Users'))
+                 inputs = c('Start Periodic Review'),
+                 outputs = c('Send Prompt to Users'),
+                 newgraph = T)
 
-nodes <- newnode(name= 'Receive Prompt',
-                 inputs = c('Prompt Users')
+nodes <- newnode(name= 'User Receives Prompt',
+                 inputs = c('Send Prompt to Users')
                  )
 
-nodes <- newnode(name= 'Review Status',
-                 inputs = c('Receive Prompt'),
-                 outputs = c('Project Concluded', 'Project Continuing')
+nodes <- newnode(name= 'User Reviews Status',
+                 inputs = c('User Receives Prompt'),
+                 outputs = c('Project Continuing', 'Project Concluded')
                  )
 
 nodes <- newnode(name= 'Request Extension',
                  inputs = c('Project Continuing'),
-                 outputs = 'Extend Access Approved'
+                 outputs = 'Extension of Access Implemented'
                  )
 
-nodes <- newnode(name= 'Request Archive Data',
+nodes <- newnode(name= 'Low Risk Data',
                  inputs = c('Project Concluded')
+
                  )
 
-nodes <- newnode(name= 'Prepare Archive Data',
-                 inputs = c('Request Archive Data')
+nodes <- newnode(name= 'High Risk Data',
+                 inputs = c('Project Concluded')
+
                  )
 
-nodes <- newnode(name= 'Prepare Archive Data',
-                 inputs = c('Request Archive Data')
+nodes <- newnode(name = 'User Creates Data Archives Package',
+                 inputs = 'Low Risk Data'
+                 )
+
+nodes <- newnode(name = 'Data Admin Creates Data Archives Package',
+                 inputs = 'High Risk Data'
+                 )
+
+nodes <- newnode(name = 'Data Admin Stores Data',
+                 inputs = 'Data Admin Creates Data Archives Package',
+                 outputs = c('Notify User Admin of Storage',
+                   'Notify User of Storage',
+                 'Notify Registries of Project Conclusion')
+                 )
+
+nodes <- newnode(name= 'Data Archives Receives Data',
+                 inputs = c('User Creates Data Archives Package')
                  )
 
 nodes <- newnode(name= 'Store Archive Data',
-                 inputs = 'Prepare Archive Data',
-                 outputs = 'Notify User'
+                 inputs = 'Data Archives Receives Data',
+                 outputs = c('Notify User of Archive Storage',
+                 'Notify Registries of Project Conclusion')
                  )
 
 nodes <- newnode(name= 'User Data Archiving',
-                 inputs = 'Notify User',
-                 outputs = c('Destroy Data',
-                 'Store Data and Inform Data Admin of Security')
+                 inputs = 'Notify User of Archive Storage',
+                 outputs = c('User Destroys Data',
+                 'User Stores Data and Informs User Admin of Security')
                  )
 
-nodes <-  newnode(name = 'Record Status',
+nodes <-  newnode(name = 'User Admin Records Status',
                   inputs =
-                  'Store Data and Inform Data Admin of Security'
+                  'User Stores Data and Informs User Admin of Security'
                   )
+
+################################################################
+# name:plotnodes
+    dev.copy2pdf(file='DataAccessFlowDiagram-EndAccess.pdf')
+    dev.off()
