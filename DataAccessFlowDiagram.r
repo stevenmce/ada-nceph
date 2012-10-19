@@ -19,12 +19,12 @@ nodes <- newnode(name= 'Get Ethics Committee Approval',
                 inputs='Request Access',
                  outputs = 'Ethics Committee Approves Project')
  
-nodes <- newnode(name= 'Add Study Description in Registry',
+nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
                 inputs= 'Ethics Committee Approves Project'
                  )
      
 nodes <- newnode(name = 'BDM Reviews Project Application',
-                 inputs = 'Add Study Description in Registry'
+                 inputs = 'Add Study Description in ANU-User-DB'
                  )
 ## INSERT BDM APPROVAL PROCESS HERE
 
@@ -42,7 +42,7 @@ nodes <- newnode(name='Deny Access',
 
 ###########################################################################
 # Provide data
-# nodes <- newnode(name='Add to Study Description in Registry',
+# nodes <- newnode(name='Add to Study Description in ANU-User-DB',
 #                  inputs='Request Access',
 #                  outputs= 'Review Application',
 #
@@ -52,20 +52,20 @@ nodes <- newnode(name='Deny Access',
 
 nodes <- newnode(name='Notify User of Approval',
                  inputs='Approve Access',
-                 outputs='Add Access Record in Registry',
+                 outputs='Add Access Record in ANU-User-DB',
                  )
 
 # or record why not
 
 nodes <- newnode(name='Notify User of Non-approval',
                  inputs='Deny Access',
-                 outputs='Note Reason in Study Description in Registry',
+                 outputs='Note Reason in Study Description in ANU-User-DB',
                  )
 
 
 
 nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                 inputs = 'Add Access Record in Registry'
+                 inputs = 'Add Access Record in ANU-User-DB'
                  )
 
 
@@ -86,14 +86,14 @@ nodes <- newnode(name = 'High Risk Data', outputs =
                  inputs = 'Store data extract in appropriate location'
                  )
 
-nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+nodes <- newnode(name= 'Add File Record to ANU-User-DB', newgraph = F,
                  inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
 
 
                  outputs = c('Notify User of Access')
 )
 
-nodes <- newnode(name = 'Modify file and access records in registry',
+nodes <- newnode(name = 'Modify file and access records in ANU-User-DB',
                  inputs = 'Notify User of Access')
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
@@ -103,7 +103,7 @@ dev.off()
 # newnode Manage Access
 
 nodes <- newnode(name= 'List Current Users',
-                 inputs = c('Modify file access record in registry'),
+                 inputs = c('Modify file access record in ANU-User-DB'),
                  outputs = c('Email Users'),
                  newgraph = T
                  )
@@ -122,7 +122,7 @@ nodes <- newnode(name= 'Report Status',
 nodes <- newnode(name= 'Input Response',
                  inputs = c('No Change', 'Changed Status'),
                  outputs = c('Write Report',
-                 'Modify file access record in registry', 'Review Report'))
+                 'Modify file access record in ANU-User-DB', 'Review Report'))
 
 ################################################################
 # name:plotnodes
@@ -191,7 +191,7 @@ nodes <- newnode(name= 'User Data Archiving',
                  'User Stores Data and Informs User Admin of Security')
                  )
 
-nodes <-  newnode(name = 'User Admin Records Status',
+nodes <-  newnode(name = 'User Admin Records Status in ANU-User-DB',
                   inputs =
                   'User Stores Data and Informs User Admin of Security'
                   )

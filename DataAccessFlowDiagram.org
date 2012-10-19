@@ -8,19 +8,20 @@
 
 \clearpage
 * TODOLIST
-** TODO Ivan change registry to ANU-DB
-** TODO Ivan send to steve by noon Fri.
-** TODO Steve review and comment 
-** TODO Ivan revise and send to BDM by Wed-ish
+** TODO Ivan change registry to ANU-User-DB
+** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
+** TODO Steve review and comment
+** TODO Ivan to revise lucidchart highlevel version on Mon-Tues
+** TODO Ivan finalise and send to BDM by Wed-ish, CC Steve
 * Introduction 
 The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 
-The following descibes roles and processes for:
-- Users
-- User Admins
-- Data Admins
+The following descibes procedures and processes for three different agents in the system, with different roles:
+- Users,
+- User Administrators, and 
+- Data Administrators.
 
-The User and Data information is stored in a Database at ANU referred to as ANU-DB.
+The User and Data information that is used to control the actions of the system are stored in a Database at ANU referred to as the ANU-User-DB.
 
 * COMMENT graphviz code
 #+name:flowdiagram
@@ -32,6 +33,9 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
   source('~/tools/disentangle/src/newnode.r')
 #+end_src
 * Getting Access
+The procedure to get help users apply for and gain access to these data is formally defined 
+\newpage
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
       ###########################################################################
       # Getting access
@@ -47,12 +51,12 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
                       inputs='Request Access',
                        outputs = 'Ethics Committee Approves Project')
        
-      nodes <- newnode(name= 'Add Study Description in Registry',
+      nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
                       inputs= 'Ethics Committee Approves Project'
                        )
      
       nodes <- newnode(name = 'BDM Reviews Project Application',
-                       inputs = 'Add Study Description in Registry'
+                       inputs = 'Add Study Description in ANU-User-DB'
                        )
       ## INSERT BDM APPROVAL PROCESS HERE
       
@@ -70,7 +74,7 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
       
       ###########################################################################
       # Provide data
-      # nodes <- newnode(name='Add to Study Description in Registry',
+      # nodes <- newnode(name='Add to Study Description in ANU-User-DB',
       #                  inputs='Request Access',
       #                  outputs= 'Review Application',
       #
@@ -80,20 +84,20 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
       
       nodes <- newnode(name='Notify User of Approval',
                        inputs='Approve Access',
-                       outputs='Add Access Record in Registry',
+                       outputs='Add Access Record in ANU-User-DB',
                        )
       
       # or record why not
       
       nodes <- newnode(name='Notify User of Non-approval',
                        inputs='Deny Access',
-                       outputs='Note Reason in Study Description in Registry',
+                       outputs='Note Reason in Study Description in ANU-User-DB',
                        )
       
       
       
       nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                       inputs = 'Add Access Record in Registry'
+                       inputs = 'Add Access Record in ANU-User-DB'
                        )
       
       
@@ -114,14 +118,14 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
                        inputs = 'Store data extract in appropriate location'
                        )
       
-      nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+      nodes <- newnode(name= 'Add File Record to ANU-User-DB', newgraph = F,
                        inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
       
       
                        outputs = c('Notify User of Access')
       )
       
-      nodes <- newnode(name = 'Modify file and access records in registry',
+      nodes <- newnode(name = 'Modify file and access records in ANU-User-DB',
                        inputs = 'Notify User of Access')
       
 #+end_src  
@@ -133,24 +137,25 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
     
 #+end_src
 ** Flow Chart of Steps to Get Access
+*** TODO change this to the lucidchart version
 #\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
-\caption{DataAccessFlowDiagram-GettingAccess}
+\caption{Flow Diagram of Getting Access}
 \label{fig:DataAccessFlowDiagram-GettingAccess}
 \end{figure}
 \clearpage
 
 * Managing Access
-** Query Lists of Projects and Users
-This is biannual or annual.
+The User Administrator is responsible for managing current access.  This means they regularly run a query on the ANU-User-DB to make a list of all Projects and Users and each Project is sent a reminder to report any changes in Project Status.  These reminders are sent annually to coincide with a similar reminder sent by the Ethics Committee.  The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no 
   ###########################################################################
   # newnode Manage Access
   
   nodes <- newnode(name= 'List Current Users',
-                   inputs = c('Modify file access record in registry'),
+                   inputs = c('Modify file access record in ANU-User-DB'),
                    outputs = c('Email Users'),
                    newgraph = T
                    )
@@ -169,7 +174,7 @@ This is biannual or annual.
   nodes <- newnode(name= 'Input Response',
                    inputs = c('No Change', 'Changed Status'),
                    outputs = c('Write Report',
-                   'Modify file access record in registry', 'Review Report'))
+                   'Modify file access record in ANU-User-DB', 'Review Report'))
 #+end_src
 ** COMMENT plot nodes
 #+name:plotnodes
@@ -182,18 +187,19 @@ This is biannual or annual.
 #+end_src
 
 ** Flow Chart of Steps to Manage Access
-
+*** TODO change this to the lucidchart version
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
-\caption{DataAccessFlowDiagram-ManagingAccess}
+\caption{Flow Diagram of Managing Access}
 \label{fig:DataAccessFlowDiagram-ManagingAccess}
 \end{figure}
 \clearpage
 
 
 * Ending Access
-** Flow Chart for Ending Access
+The procedure for ending access aims to ensure that data are both securely and sustainably stored.  It is very important that files used for authorised projects are never re-used in un-authorised projects, but that future researchers may have the opportunity to create an authorised project and potentially replicate historical analyses.  This is an important part of reproducible research and the robust practice of scientific enquiry.
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no   
   ###########################################################################
   # newnode End Access
@@ -257,7 +263,7 @@ This is biannual or annual.
                    'User Stores Data and Informs User Admin of Security')
                    )
   
-  nodes <-  newnode(name = 'User Admin Records Status',
+  nodes <-  newnode(name = 'User Admin Records Status in ANU-User-DB',
                     inputs =
                     'User Stores Data and Informs User Admin of Security'
                     )
@@ -273,12 +279,13 @@ This is biannual or annual.
   
 #+end_src
 
-** Flow Chart of Steps to Manage Access
+** Flow Chart for Ending Access
+*** TODO change this to the lucidchart version
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
-\caption{DataAccessFlowDiagram-EndAccess}
+\caption{Flow Diagram for Ending Access}
 \label{fig:DataAccessFlowDiagram-EndAccess}
 \end{figure}
 \clearpage
