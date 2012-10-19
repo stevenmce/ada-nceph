@@ -33,90 +33,97 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
 #+end_src
 * Getting Access
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
-  ###########################################################################
-  # Getting access
-  
-  nodes <- newnode(name='Browse Catalogue',
-                   inputs = 'Search for Data',
-                   outputs = 'Request Access',
-                   newgraph = T
-                   )
-  
-  nodes <- newnode(name= 'Add Study Description in Registry',
-                  inputs='Request Access')
-  
-  nodes <- newnode(name='Review Application',
-                   inputs = 'Add Study Description in Registry'
-                   )
-  
-  nodes <- newnode(name='Approve Access',
-                   inputs = 'Review Application'
-  
-                   )
-  
-  nodes <- newnode(name='Deny Access',
-                   inputs = 'Review Application'
-  
-  )
-  
-  
-  
-  ###########################################################################
-  # Provide data
-  # nodes <- newnode(name='Add to Study Description in Registry',
-  #                  inputs='Request Access',
-  #                  outputs= 'Review Application',
-  #
-  #                  )
-  
-  # notify approval
-  
-  nodes <- newnode(name='Notify User of Approval',
-                   inputs='Approve Access',
-                   outputs='Add Access Record in Registry',
-                   )
-  
-  # or record why not
-  
-  nodes <- newnode(name='Notify User of Non-approval',
-                   inputs='Deny Access',
-                   outputs='Note Reason in Study Description in Registry',
-                   )
-  
-  
-  
-  nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                   inputs = 'Add Access Record in Registry'
-                   )
-  
-  
-  nodes <- newnode(name='Extract to Restricted Server', newgraph = F,
-                   inputs = 'Give access to Restricted Server'
-                   )
-  
-  nodes <- newnode(name= 'Store data extract in appropriate location', newgraph = F,
-                   inputs = c('Extract to Restricted Server'),
-                   outputs = c('Low Risk Data')
-                   )
-  
-  nodes <- newnode(name = 'CSV',
-                   inputs = 'Low Risk Data')
-  
-  nodes <- newnode(name = 'High Risk Data', outputs =
-                   c('Database schema', 'Rstudio user workspace'),
-                   inputs = 'Store data extract in appropriate location'
-                   )
-  
-  nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
-                   inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
-  
-  
-                   outputs = c('Notify User of Access')
-  )
-  
-  nodes <- newnode(name = 'Modify file and access records in registry',
-                   inputs = 'Notify User of Access')
-  
+      ###########################################################################
+      # Getting access
+      
+      nodes <- newnode(name='Browse Catalogue',
+                       inputs = 'Search for Data',
+                       outputs = 'Request Access',
+                       newgraph = T
+                       )
+      ## NEEDS ETHICS COMMITTEE PROCESS HERE
+      
+      nodes <- newnode(name= 'Get Ethics Committee Approval',
+                      inputs='Request Access',
+                       outputs = 'Ethics Committee Approves Project')
+       
+      nodes <- newnode(name= 'Add Study Description in Registry',
+                      inputs= 'Ethics Committee Approves Project'
+                       )
+     
+      nodes <- newnode(name = 'BDM Reviews Project Application',
+                       inputs = 'Add Study Description in Registry'
+                       )
+      ## INSERT BDM APPROVAL PROCESS HERE
+      
+      nodes <- newnode(name='Approve Access',
+                       inputs = 'BDM Reviews Project Application'
+      
+                       )
+      
+      nodes <- newnode(name='Deny Access',
+                       inputs = 'BDM Reviews Project Application'
+      
+      )
+      
+      
+      
+      ###########################################################################
+      # Provide data
+      # nodes <- newnode(name='Add to Study Description in Registry',
+      #                  inputs='Request Access',
+      #                  outputs= 'Review Application',
+      #
+      #                  )
+      
+      # notify approval
+      
+      nodes <- newnode(name='Notify User of Approval',
+                       inputs='Approve Access',
+                       outputs='Add Access Record in Registry',
+                       )
+      
+      # or record why not
+      
+      nodes <- newnode(name='Notify User of Non-approval',
+                       inputs='Deny Access',
+                       outputs='Note Reason in Study Description in Registry',
+                       )
+      
+      
+      
+      nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
+                       inputs = 'Add Access Record in Registry'
+                       )
+      
+      
+      nodes <- newnode(name='Extract to Restricted Server', newgraph = F,
+                       inputs = 'Give access to Restricted Server'
+                       )
+      
+      nodes <- newnode(name= 'Store data extract in appropriate location', newgraph = F,
+                       inputs = c('Extract to Restricted Server'),
+                       outputs = c('Low Risk Data')
+                       )
+      
+      nodes <- newnode(name = 'CSV',
+                       inputs = 'Low Risk Data')
+      
+      nodes <- newnode(name = 'High Risk Data', outputs =
+                       c('Database schema', 'Rstudio user workspace'),
+                       inputs = 'Store data extract in appropriate location'
+                       )
+      
+      nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+                       inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
+      
+      
+                       outputs = c('Notify User of Access')
+      )
+      
+      nodes <- newnode(name = 'Modify file and access records in registry',
+                       inputs = 'Notify User of Access')
+      
 #+end_src  
 ** COMMENT plot nodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r  :exports none :eval no   

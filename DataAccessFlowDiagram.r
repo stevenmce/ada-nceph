@@ -13,21 +13,28 @@ nodes <- newnode(name='Browse Catalogue',
                  outputs = 'Request Access',
                  newgraph = T
                  )
+## NEEDS ETHICS COMMITTEE PROCESS HERE
 
+nodes <- newnode(name= 'Get Ethics Committee Approval',
+                inputs='Request Access',
+                 outputs = 'Ethics Committee Approves Project')
+ 
 nodes <- newnode(name= 'Add Study Description in Registry',
-                inputs='Request Access')
-
-nodes <- newnode(name='Review Application',
+                inputs= 'Ethics Committee Approves Project'
+                 )
+     
+nodes <- newnode(name = 'BDM Reviews Project Application',
                  inputs = 'Add Study Description in Registry'
                  )
+## INSERT BDM APPROVAL PROCESS HERE
 
 nodes <- newnode(name='Approve Access',
-                 inputs = 'Review Application'
+                 inputs = 'BDM Reviews Project Application'
 
                  )
 
 nodes <- newnode(name='Deny Access',
-                 inputs = 'Review Application'
+                 inputs = 'BDM Reviews Project Application'
 
 )
 
