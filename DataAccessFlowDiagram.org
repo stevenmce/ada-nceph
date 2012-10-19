@@ -8,7 +8,6 @@
 
 \clearpage
 * TODOLIST
-** TODO Ivan change registry to ANU-User-DB
 ** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
 ** TODO Steve review and comment
 ** TODO Ivan to revise lucidchart highlevel version on Mon-Tues
@@ -22,7 +21,7 @@ The following descibes procedures and processes for three different agents in th
 - Data Administrators.
 
 The User and Data information that is used to control the actions of the system are stored in a Database at ANU referred to as the ANU-User-DB.
-
+\newpage
 * COMMENT graphviz code
 #+name:flowdiagram
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
@@ -33,8 +32,8 @@ The User and Data information that is used to control the actions of the system 
   source('~/tools/disentangle/src/newnode.r')
 #+end_src
 * Getting Access
-The procedure to get help users apply for and gain access to these data is formally defined 
-\newpage
+The procedure to help users apply for and gain access to these data is a set of formally defined steps that are designed to move the User from an initial state of searching for data through the process of gaining Ethics Approval from a Human Research Ethics Committee, and Project Level Approval from the Registrar of Births, Deaths and Marriages.  Then a confidentialised (often aggregated) dataset is provided in a secure manner as appropriate given the nature of the data and any project management related criteria such as access to remote secure servers versus encrypted archives accessed on local disk media.
+
 ** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
       ###########################################################################
@@ -290,7 +289,7 @@ The procedure for ending access aims to ensure that data are both securely and s
 \end{figure}
 \clearpage
 
-* Visualise the Data Access Process
+* COMMENT Visualise the Data Access Process
 
 ** COMMENT plot nodes
 #+begin_src R :session *R* :tangle no :exports none :eval no   
