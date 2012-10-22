@@ -6,8 +6,8 @@
 #+LATEX: \tableofcontents
 #+LATEX_HEADER: \usepackage{pdfpages}
 
-\clearpage
-* TODOLIST
+#\clearpage
+* COMMENT TODOLIST
 ** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
 ** TODO Steve review and comment
 ** TODO Ivan to revise lucidchart highlevel version on Mon-Tues
@@ -33,9 +33,9 @@ The User and Data information that is used to control the actions of the system 
 #+end_src
 * Getting Access
 The "Getting Access" procedure to help users apply for and gain access to mortality data is a set of formally defined steps that are designed to move the User through three general stages:
- - Finding data: the initial state of searching for data
- - Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.  
- - Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria .
+- Finding data: the initial state of searching for data.
+- Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
+- Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria.
 
 ** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
