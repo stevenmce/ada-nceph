@@ -15,7 +15,6 @@ nodes <- newnode(name='Browse Catalogue',
                  )
 ## NEEDS ETHICS COMMITTEE PROCESS HERE
 
-<<<<<<< HEAD
 nodes <- newnode(name= 'Get Ethics Committee Approval',
                 inputs='Request Access',
                  outputs = 'Ethics Committee Approves Project')
@@ -26,18 +25,7 @@ nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
      
 nodes <- newnode(name = 'BDM Reviews Project Application',
                  inputs = 'Add Study Description in ANU-User-DB'
-=======
-nodes <- newnode(name= 'Add Study Description in Registry',
-                inputs='Request Access')
-
-## NEEDS ETHICS COMMITTEE PROCESS HERE
-
-nodes <- newnode(name='Review Application',
-                 inputs = 'Add Study Description in Registry'
->>>>>>> original/master
                  )
-## INSERT BDM APPROVAL PROCESS HERE
-
 ## INSERT BDM APPROVAL PROCESS HERE
 
 nodes <- newnode(name='Approve Access',
