@@ -37,6 +37,17 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
 - Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
 - Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria.
 
+The general steps in the process are shown in Figure 1, while a more detailed description of the process is shown in the Appendix, Figure 4.
+
+#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\textwidth]{DataAccessFlowDiagram-GettingAccess-general.png}
+\caption{Flow Diagram of Getting Access}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+
 ** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
@@ -173,16 +184,6 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
     
 #+end_src
 
-** Flow Chart of Steps to Get Access
-*** TODO change this to the lucidchart version
-#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1.5\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
-\caption{Flow Diagram of Getting Access}
-\label{fig:DataAccessFlowDiagram-GettingAccess}
-\end{figure}
-\clearpage
 
 * Managing Access
 Procedures for managing access are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
@@ -333,8 +334,7 @@ The procedure for ending access aims to ensure that data are both securely and s
 \end{figure}
 \clearpage
 
-* COMMENT Visualise the Data Access Process
-
+* Appendices
 ** COMMENT plot all nodes
 #+begin_src R :session *R* :tangle no :exports none :eval no   
   
@@ -345,3 +345,14 @@ The procedure for ending access aims to ensure that data are both securely and s
   #dev.off()
   
 #+end_src
+
+** Details of Steps for Getting Access
+#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
+\caption{Detailed Flow Diagram of Getting Access}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+
