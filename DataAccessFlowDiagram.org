@@ -21,6 +21,49 @@
 ** TODO Steve review and comment
 ** TODO Ivan to revise lucidchart highlevel version on Mon-Tues
 ** TODO Ivan finalise and send to BDM by Wed-ish, CC Steve
+** TODO Ivan Test BDM survey
+*** intro
+From: Jo-Marie Moore [jo.moore@abs.gov.au]
+Sent: 23 October 2012 16:31
+To: Ivan Hanigan
+Subject: RE: Registry of Births, Deaths and Marriages User Survey testing [SEC=UNCLASSIFIED]
+
+Hi Ivan,
+
+The Registry User survey is ready for testing.  The survey covers COD data, but also Registry data more generally.  Once tested it will be sent to all our Registry data users (in all States and Territories) and those on our COD URF communications register.
+*** survey
+Please follow the link and complete the survey as if you were really responding on behalf of your agency.  
+https://www.surveymonkey.com/s/registrydatasurvey
+*** QA
+Please remember to record the following:
+1. How long it the survey took to complete.
+2. Would you know who you should also forward the survey onto within your agency and who would you forward this to outside of your agency (if any).
+3. If any of the questions did not make sense (if you think this is going to have a major impact on our survey results, if you have any suggested improvements for the question)
+4. Any spelling or other errors
+5. Any other suggestions you have as you work through the survey
+*** respond
+Please let me know by email to both my QLD Registry and ABS email addresses when you have completed the survey, so we can also test running aggregated reports.  
+
+We would really appreciate your feedback as soon as possible.
+
+Thanks
+
+Jo-Marie Moore
+
+Assistant Director
+
+(Please note: I work Tuesday at the ABS and Monday, Wednesday-Friday at the QLD Registry of Births, Deaths and Marriages)
+
+Outposted Officer - QLD Births, Deaths and Marriages  |  Health & Vitals Branch  |  Australian Bureau of Statistics
+
+(P) (07) 3222 6080   (M) 0437 1343 77  (F) (07) 3222 6299
+
+(E) jo.moore@abs.gov.au  (W)  www.abs.gov.au
+
+NatStats 2013 Conference, Brisbane Convention and Exhibition Centre, 12-14 March 2013
+Early bird registrations close 31 October 2012
+www.nss.gov.au/blog/natstats.nsf 
+
 * Introduction 
 The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 
@@ -156,20 +199,20 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
   #plot(nodes, nodeAttrs=nA, attrs = attrs)
   nodes(nodes)
   # USER
-  nA$fillcolor[nodes(nodes)[1:4]] <- '#8DD3C7'
+  nA$fillcolor[nodes(nodes)[1:4]] <- '#FB8072' #'#8DD3C7'
   # USER ADMIN
   nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- '#FFFFB3'
   # DATA ADMIN
   nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- '#BEBADA'
   # DECISIONS
   dec <- c(5,8:9, 17,19)
-  nA$fillcolor[nodes(nodes)[dec]] <- '#FB8072'
+  nA$fillcolor[nodes(nodes)[dec]] <- 'white' 
   nA$shape[nodes(nodes)[dec]] <- 'box'
   
   plot(nodes, nodeAttrs=nA, attrs = attrs)
   legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
-         pch = c(21,21,21,22),
-         pt.bg = c('#8DD3C7', '#FFFFB3', '#BEBADA', '#FB8072')
+         pch = c(21,21,21,22), pt.cex = 1.5,
+         pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', 'white')
          )
   
 #+end_src
