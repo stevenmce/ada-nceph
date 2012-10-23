@@ -37,14 +37,27 @@ https://www.surveymonkey.com/s/registrydatasurvey
 *** QA
 Please remember to record the following:
 1. How long it the survey took to complete.
+35 minutes
 
 2. Would you know who you should also forward the survey onto within your agency and who would you forward this to outside of your agency (if any).
+Deputy Director at the Australian Data Archives, the Data Manager at the Australian Demographic and Social Research Intitute, the Data Manager at the Centre for Mental Health Research, The Population Health Research Network, the Secure Unified Research Environment (SURE) team at the Sax Institute.
 
 3. If any of the questions did not make sense (if you think this is going to have a major impact on our survey results, if you have any suggested improvements for the question)
 
+Q4.4 Agency has organisational legislative protections for the access and use of data
+The University has a policy called the 'Responsible Practice of Research' which makes statements about appropriate access and use of data, and that references the NHMRC guidelines on human research.  Not sure if this counts as organisational legislation though?
+4.6 Restricted access to data store or IT access approval process.
+perhaps 'is access to the data store restricted with IT access approval processes in place?'
+4.9 in secure remote server environments the passes would be worn by IT infrastructure staff, the researchers in a different building would not need these but do work in locked rooms and password protected computers.  I answered for the researchers, but out IT Infrastructure server room is swipecard entry only.
+4.10 ANU operates a virtual machine (VM) cluster which means that individual servers (VMs) are connected.  They operate like seperate computers so I answered yes.
+
+
 4. Any spelling or other errors
+Q6.9 To make aggregate dta tables available publicly
+should be data
 
 5. Any other suggestions you have as you work through the survey
+No
 
 *** respond
 Please let me know by email to both my QLD Registry and ABS email addresses when you have completed the survey, so we can also test running aggregated reports.  
