@@ -37,10 +37,15 @@ https://www.surveymonkey.com/s/registrydatasurvey
 *** QA
 Please remember to record the following:
 1. How long it the survey took to complete.
+
 2. Would you know who you should also forward the survey onto within your agency and who would you forward this to outside of your agency (if any).
+
 3. If any of the questions did not make sense (if you think this is going to have a major impact on our survey results, if you have any suggested improvements for the question)
+
 4. Any spelling or other errors
+
 5. Any other suggestions you have as you work through the survey
+
 *** respond
 Please let me know by email to both my QLD Registry and ABS email addresses when you have completed the survey, so we can also test running aggregated reports.  
 
