@@ -147,9 +147,9 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
   #plot(nodes, nodeAttrs=nA, attrs = attrs)
   nodes(nodes)
   # USER
-  nA$fillcolor[nodes(nodes)[1:4]] <- 'red'
+  nA$fillcolor[nodes(nodes)[1:4]] <- 'darkgrey'
   # USER ADMIN
-  nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'darkgrey'
+  nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'red'
   # DATA ADMIN
   nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
   # DECISIONS
@@ -335,7 +335,7 @@ The procedure for ending access aims to ensure that data are both securely and s
 
 * COMMENT Visualise the Data Access Process
 
-** COMMENT plot nodes
+** COMMENT plot all nodes
 #+begin_src R :session *R* :tangle no :exports none :eval no   
   
   source('DataAccessFlowDiagram.r')

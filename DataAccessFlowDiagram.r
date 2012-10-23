@@ -109,9 +109,9 @@ nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
 #plot(nodes, nodeAttrs=nA, attrs = attrs)
 nodes(nodes)
 # USER
-nA$fillcolor[nodes(nodes)[1:4]] <- 'red'
+nA$fillcolor[nodes(nodes)[1:4]] <- 'darkgrey'
 # USER ADMIN
-nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'darkgrey'
+nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'red'
 # DATA ADMIN
 nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
 # DECISIONS
