@@ -133,7 +133,7 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
 #+end_src  
 ** COMMENT add colour
 #+name:add-colour
-#+begin_src R :session *shell* :tangle DataAccessFlowDiagram.r :exports none :eval no
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
   # newnode: test-colour
   attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
@@ -159,8 +159,8 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
   
   plot(nodes, nodeAttrs=nA, attrs = attrs)
   legend('topright', legend = c('User','User Admin', 'Data Admin','Decision'),
-         pch = cc1,1,pch=i, axes=F, cex = 3, col = 'blue', bg = 'yellow')
-         col=c('lightblue','grey', 'lightyellow', 'red')
+         pch = c(21,21,21,22),
+         pt.bg = c('lightblue','grey', 'lightyellow', 'red')
          )
   
 #+end_src

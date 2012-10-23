@@ -18,23 +18,23 @@ nodes <- newnode(name='Browse Catalogue',
 nodes <- newnode(name= 'Get Ethics Committee Approval',
                 inputs='Request Access',
                  outputs = 'Ethics Committee Approves Project')
- 
+
 nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
                 inputs= 'Ethics Committee Approves Project'
                  )
-     
-nodes <- newnode(name = 'BDM Reviews Project Application',
+
+nodes <- newnode(name = 'Get BDM Committee Approval',
                  inputs = 'Add Study Description in ANU-User-DB'
                  )
 ## INSERT BDM APPROVAL PROCESS HERE
 
 nodes <- newnode(name='Approve Access',
-                 inputs = 'BDM Reviews Project Application'
+                 inputs = 'Get BDM Committee Approval'
 
                  )
 
 nodes <- newnode(name='Deny Access',
-                 inputs = 'BDM Reviews Project Application'
+                 inputs = 'Get BDM Committee Approval'
 
 )
 
@@ -95,6 +95,35 @@ nodes <- newnode(name= 'Add File Record to ANU-User-DB', newgraph = F,
 
 nodes <- newnode(name = 'Modify file and access records in ANU-User-DB',
                  inputs = 'Notify User of Access')
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[1:4]] <- 'lightblue'
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'grey'
+# DATA ADMIN
+nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightyellow'
+# DECISIONS
+dec <- c(5,8:9, 17,19)
+nA$fillcolor[nodes(nodes)[dec]] <- 'red'
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topright', legend = c('User','User Admin', 'Data Admin','Decision'),
+       pch = c(21,21,21,22),
+       pt.bg = c('lightblue','grey', 'lightyellow', 'red')
+       )
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
 dev.off()
