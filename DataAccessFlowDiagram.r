@@ -122,7 +122,7 @@ nA$shape[nodes(nodes)[dec]] <- 'box'
 plot(nodes, nodeAttrs=nA, attrs = attrs)
 legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
        pch = c(21,21,21,22),
-       pt.bg = c('red','darkgrey', 'lightblue', 'white')
+       pt.bg = c('darkgrey', 'red', 'lightblue', 'white')
        )
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
@@ -152,6 +152,35 @@ nodes <- newnode(name= 'Input Response',
                  inputs = c('No Change', 'Changed Status'),
                  outputs = c('Write Report',
                  'Modify file access record in ANU-User-DB', 'Review Report'))
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[4:5]] <- 'lightblue'
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- 'darkgrey'
+# DATA ADMIN
+#nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+# DECISIONS
+dec <- c(6:7)
+nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topleft', legend = c('User','User Admin', 'Decision'),
+       pch = c(21,21,22),
+       pt.bg = c('lightblue','darkgrey', 'white')
+       )
 
 ################################################################
 # name:plotnodes

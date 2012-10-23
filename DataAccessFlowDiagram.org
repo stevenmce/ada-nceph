@@ -32,17 +32,14 @@ The User and Data information that is used to control the actions of the system 
   source('~/tools/disentangle/src/newnode.r')
 #+end_src
 * Getting Access
-The "Getting Access" procedure to help users apply for and gain access to mortality data is a set of formally defined steps that are designed to move the User through three general stages:
-- Finding data: the initial state of searching for data.
+The "Getting Access" procedure to help users apply for and gain access to mortality data is shown in Figure 1, and a more detailed description of the process is shown in the Appendix, Figure 4. The process is a set of formally defined steps that are designed to move the User through two general stages:
 - Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
 - Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria.
-
-The general steps in the process are shown in Figure 1, while a more detailed description of the process is shown in the Appendix, Figure 4.
 
 #\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=.8\textwidth]{DataAccessFlowDiagram-GettingAccess-general.png}
+\includegraphics[width=1\textwidth]{DataAccessFlowDiagram-GettingAccess-general.png}
 \caption{Flow Diagram of Getting Access}
 \label{fig:DataAccessFlowDiagram-GettingAccess}
 \end{figure}
@@ -171,7 +168,7 @@ The general steps in the process are shown in Figure 1, while a more detailed de
   plot(nodes, nodeAttrs=nA, attrs = attrs)
   legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
          pch = c(21,21,21,22),
-         pt.bg = c('red','darkgrey', 'lightblue', 'white')
+         pt.bg = c('darkgrey', 'red', 'lightblue', 'white')
          )
   
 #+end_src
@@ -186,11 +183,21 @@ The general steps in the process are shown in Figure 1, while a more detailed de
 
 
 * Managing Access
-Procedures for managing access are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
+Procedures for managing access (Figures 2 and 5) are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
 
 The process is initiated by running a query on the ANU-User-DB to make a list of all Projects and Users, and then each Project is sent a reminder to report any changes in Project Status (sent annually to coincide with a similar reminder sent by the ANU Human Research Ethics Committee). The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
 
 Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then iniitate the final "Ending Access" process.
+
+
+# \begin{figure}[!h]
+# \centering
+# \includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess-general.png}
+# \caption{Flow Diagram of Managing Access}
+# \label{fig:DataAccessFlowDiagram-ManagingAccess}
+# \end{figure}
+# \clearpage
+
 
 ** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no 
@@ -219,25 +226,50 @@ Once a response is received, the User Administrator then enters the relevant inf
                    outputs = c('Write Report',
                    'Modify file access record in ANU-User-DB', 'Review Report'))
 #+end_src
+** COMMENT add colour
+#+name:add-colour
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: test-colour
+  attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+  plot(nodes, attrs = attrs)
+  nNodes <- length(nodes(nodes))
+  nA <- list()
+  nA$fillcolor <- rep('grey', nNodes)
+  nA$shape <- rep("ellipse", nNodes)
+  nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+  #nA
+  #plot(nodes, nodeAttrs=nA, attrs = attrs)
+  nodes(nodes)
+  # USER
+  nA$fillcolor[nodes(nodes)[4:5]] <- 'lightblue'
+  # USER ADMIN
+  nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- 'darkgrey'
+  # DATA ADMIN
+  #nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+  # DECISIONS
+  dec <- c(6:7)
+  nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+  nA$shape[nodes(nodes)[dec]] <- 'box'
+  
+  plot(nodes, nodeAttrs=nA, attrs = attrs)
+  legend('topleft', legend = c('User','User Admin', 'Decision'),
+         pch = c(21,21,22),
+         pt.bg = c('lightblue','darkgrey', 'white')
+         )
+  
+#+end_src
+
 ** COMMENT plot nodes
 #+name:plotnodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
-################################################################
-# name:plotnodes
-    dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
-    dev.off()
-
+  ################################################################
+  # name:plotnodes
+      dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
+      dev.off()
+  
 #+end_src
 
-** Flow Chart of Steps to Manage Access
-*** TODO change this to the lucidchart version
-\begin{figure}[!h]
-\centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
-\caption{Flow Diagram of Managing Access}
-\label{fig:DataAccessFlowDiagram-ManagingAccess}
-\end{figure}
-\clearpage
 
 
 * Ending Access
@@ -353,6 +385,15 @@ The procedure for ending access aims to ensure that data are both securely and s
 \includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
 \caption{Detailed Flow Diagram of Getting Access}
 \label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+** Details of Steps to Manage Access
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
+\caption{Flow Diagram of Managing Access}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
 \end{figure}
 \clearpage
 
