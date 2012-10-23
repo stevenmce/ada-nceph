@@ -7,6 +7,15 @@
 #+LATEX_HEADER: \usepackage{pdfpages}
 
 #\clearpage
+* COMMENT graphviz code
+#+name:flowdiagram
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: mortalityAccessFlowDiagram
+  # REQUIRES THE DISENTANGLE REPO FROM https://github.com/ivanhanigan/disentangle
+  # Clone into a tools directory, or change the following line
+  source('~/tools/disentangle/src/newnode.r')
+#+end_src
 * COMMENT TODOLIST
 ** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
 ** TODO Steve review and comment
@@ -22,15 +31,7 @@ The following descibes procedures and processes for three different agents in th
 
 The User and Data information that is used to control the actions of the system are stored in a Database at ANU referred to as the ANU-User-DB.
 \newpage
-* COMMENT graphviz code
-#+name:flowdiagram
-#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
-  ###########################################################################
-  # newnode: mortalityAccessFlowDiagram
-  # REQUIRES THE DISENTANGLE REPO FROM https://github.com/ivanhanigan/disentangle
-  # Clone into a tools directory, or change the following line
-  source('~/tools/disentangle/src/newnode.r')
-#+end_src
+
 * Getting Access
 The "Getting Access" procedure to help users apply for and gain access to mortality data is shown in Figure 1, and a more detailed description of the process is shown in the Appendix, Figure 4. The process is a set of formally defined steps that are designed to move the User through two general stages:
 - Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
@@ -155,20 +156,20 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
   #plot(nodes, nodeAttrs=nA, attrs = attrs)
   nodes(nodes)
   # USER
-  nA$fillcolor[nodes(nodes)[1:4]] <- 'darkgrey'
+  nA$fillcolor[nodes(nodes)[1:4]] <- '#8DD3C7'
   # USER ADMIN
-  nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'red'
+  nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- '#FFFFB3'
   # DATA ADMIN
-  nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+  nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- '#BEBADA'
   # DECISIONS
   dec <- c(5,8:9, 17,19)
-  nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+  nA$fillcolor[nodes(nodes)[dec]] <- '#FB8072'
   nA$shape[nodes(nodes)[dec]] <- 'box'
   
   plot(nodes, nodeAttrs=nA, attrs = attrs)
   legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
          pch = c(21,21,21,22),
-         pt.bg = c('darkgrey', 'red', 'lightblue', 'white')
+         pt.bg = c('#8DD3C7', '#FFFFB3', '#BEBADA', '#FB8072')
          )
   
 #+end_src
@@ -183,7 +184,7 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
 
 
 * Managing Access
-Procedures for managing access (Figures 2 and 5) are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
+Procedures for managing access are shown in Figure 2 (and in the Appendix, Figure 5). These activities are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
 
 The process is initiated by running a query on the ANU-User-DB to make a list of all Projects and Users, and then each Project is sent a reminder to report any changes in Project Status (sent annually to coincide with a similar reminder sent by the ANU Human Research Ethics Committee). The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
 

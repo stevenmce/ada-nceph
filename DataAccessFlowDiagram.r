@@ -109,20 +109,20 @@ nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
 #plot(nodes, nodeAttrs=nA, attrs = attrs)
 nodes(nodes)
 # USER
-nA$fillcolor[nodes(nodes)[1:4]] <- 'darkgrey'
+nA$fillcolor[nodes(nodes)[1:4]] <- '#8DD3C7'
 # USER ADMIN
-nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- 'red'
+nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- '#FFFFB3'
 # DATA ADMIN
-nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- '#BEBADA'
 # DECISIONS
 dec <- c(5,8:9, 17,19)
-nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+nA$fillcolor[nodes(nodes)[dec]] <- '#FB8072'
 nA$shape[nodes(nodes)[dec]] <- 'box'
 
 plot(nodes, nodeAttrs=nA, attrs = attrs)
 legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
        pch = c(21,21,21,22),
-       pt.bg = c('darkgrey', 'red', 'lightblue', 'white')
+       pt.bg = c('#8DD3C7', '#FFFFB3', '#BEBADA', '#FB8072')
        )
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
