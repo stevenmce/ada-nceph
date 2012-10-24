@@ -190,13 +190,13 @@ The process is initiated by running a query on the ANU-User-DB to make a list of
 Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then iniitate the final "Ending Access" process.
 
 
-# \begin{figure}[!h]
-# \centering
-# \includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess-general.png}
-# \caption{Flow Diagram of Managing Access}
-# \label{fig:DataAccessFlowDiagram-ManagingAccess}
-# \end{figure}
-# \clearpage
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess-general.png}
+\caption{Flow Diagram of Managing Access}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
+\end{figure}
+\clearpage
 
 
 ** COMMENT src
@@ -274,6 +274,15 @@ Once a response is received, the User Administrator then enters the relevant inf
 
 * Ending Access
 The procedure for ending access aims to ensure that data are both securely and sustainably stored.  It is very important that files used for authorised projects are never re-used in un-authorised projects, but that future researchers may have the opportunity to create an authorised project and potentially replicate historical analyses.  This is an important part of reproducible research and the robust practice of scientific enquiry.
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess-general.png}
+\caption{Flow Diagram for Ending Access}
+\label{fig:DataAccessFlowDiagram-EndAccess}
+\end{figure}
+\clearpage
 
 ** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no   
@@ -355,16 +364,6 @@ The procedure for ending access aims to ensure that data are both securely and s
   
 #+end_src
 
-** Flow Chart for Ending Access
-*** TODO change this to the lucidchart version
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
-\caption{Flow Diagram for Ending Access}
-\label{fig:DataAccessFlowDiagram-EndAccess}
-\end{figure}
-\clearpage
 
 * Appendices
 ** COMMENT plot all nodes
@@ -397,3 +396,13 @@ The procedure for ending access aims to ensure that data are both securely and s
 \end{figure}
 \clearpage
 
+** Details of Steps to End Access
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
+\caption{Flow Diagram for Ending Access}
+\label{fig:DataAccessFlowDiagram-EndAccess}
+\end{figure}
+\clearpage
