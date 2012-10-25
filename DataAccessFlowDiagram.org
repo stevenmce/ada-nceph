@@ -255,7 +255,7 @@ Procedures for managing access are shown in Figure 2 (and in the Appendix, Figur
 
 The process is initiated by running a query on the ANU-User-DB to make a list of all Projects and Users, and then each Project is sent a reminder to report any changes in Project Status (sent annually to coincide with a similar reminder sent by the ANU Human Research Ethics Committee). The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
 
-Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then iniitate the final "Ending Access" process.
+Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then initiate the final "Ending Access" process.
 
 
 \begin{figure}[!h]
@@ -517,4 +517,4 @@ The procedure for ending access aims to ensure that data are both securely and s
 \end{figure}
 \clearpage
 * Acknowledgments
-We are grateful to the advice of Doug Moncur of the ANU ITS Data Commons group for feed back on this drafts of this document.
+We are grateful to the advice of Doug Moncur of the ANU ITS Data Commons group for feed back on drafts of this document.
