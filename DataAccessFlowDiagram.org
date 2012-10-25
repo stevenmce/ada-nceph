@@ -1,8 +1,9 @@
-#+TITLE:ADA-NCEPH Data Access Procedure 
-#+AUTHOR: Ivan Hanigan and Steven McEachern
+#+TITLE:ADA-NCEPH Proposed Data Access Procedure 
+#+AUTHOR: Ivan Hanigan$^1$ and Steven McEachern$^2$
 #+email: ivan.hanigan@anu.edu.au
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LATEX: \noindent [$^1$]National Centre for Epidemiology and Population Health (NCEPH), ANU \\\ [$^2$]Australian Data Archives (ADA), ANU
 #+LATEX: \tableofcontents
 #+LATEX_HEADER: \usepackage{pdfpages}
 
@@ -520,4 +521,4 @@ The procedure for ending access aims to ensure that data are both securely and s
 \end{figure}
 \clearpage
 * Acknowledgments
-We are grateful to the advice of Doug Moncur of the ANU ITS Data Commons group for feed back on drafts of this document.
+We are grateful to the advice of Doug Moncur of the ANU Data Commons group for feedback on drafts of this document.
