@@ -5,6 +5,11 @@
 # Clone into a tools directory, or change the following line
 source('~/tools/disentangle/src/newnode.r')
 
+userCol <- '#FB8072'
+userAdminCol <- '#FFFFB3' 
+dataAdminCol <- '#BEBADA'
+decisionCol <- 'white'
+
 ###########################################################################
 # Getting access
 
@@ -122,7 +127,7 @@ nA$shape[nodes(nodes)[dec]] <- 'box'
 plot(nodes, nodeAttrs=nA, attrs = attrs)
 legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
        pch = c(21,21,21,22), pt.cex = 1.5,
-       pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', 'white')
+       pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', decisionCol)
        )
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
@@ -131,7 +136,7 @@ dev.off()
 ###########################################################################
 # newnode Manage Access
 
-nodes <- newnode(name= 'List Current Users',
+nodes <- newnode(name= 'List Current Users/Files',
                  inputs = c('Modify file access record in ANU-User-DB'),
                  outputs = c('Email Users'),
                  newgraph = T
@@ -153,6 +158,10 @@ nodes <- newnode(name= 'Input Response',
                  outputs = c('Write Report',
                  'Modify file access record in ANU-User-DB', 'Review Report'))
 
+nodes <- newnode(name= 'Monitor File Server Backups',
+                 inputs = c('List Current Users/Files')
+                 )
+
 ###########################################################################
 # newnode: test-colour
 attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
@@ -166,20 +175,21 @@ nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
 #plot(nodes, nodeAttrs=nA, attrs = attrs)
 nodes(nodes)
 # USER
-nA$fillcolor[nodes(nodes)[4:5]] <- 'lightblue'
+nA$fillcolor[nodes(nodes)[4:5]] <- userCol
 # USER ADMIN
-nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- 'darkgrey'
+nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- userAdminCol
 # DATA ADMIN
-#nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+nA$fillcolor[nodes(nodes)[c(11)]] <- dataAdminCol
 # DECISIONS
 dec <- c(6:7)
-nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
 nA$shape[nodes(nodes)[dec]] <- 'box'
 
 plot(nodes, nodeAttrs=nA, attrs = attrs)
-legend('topleft', legend = c('User','User Admin', 'Decision'),
-       pch = c(21,21,22),
-       pt.bg = c('lightblue','darkgrey', 'white')
+legend('topleft',
+       legend = c('User','User Admin', 'Data Admin', 'Decision'),
+       pch = c(21,21,21,22),
+       pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
        )
 
 ################################################################
@@ -253,6 +263,36 @@ nodes <-  newnode(name = 'User Admin Records Status in ANU-User-DB',
                   inputs =
                   'User Stores Data and Informs User Admin of Security'
                   )
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)]] <- userCol
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)]] <- userAdminCol
+# DATA ADMIN
+nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)]] <- dataAdminCol
+# DECISIONS
+dec <- c(6,7,10,11)
+nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topleft',
+       legend = c('User','User Admin', 'Data Admin', 'Decision'),
+       pch = c(21,21,21,22),
+       pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+       )
 
 ################################################################
 # name:plotnodes

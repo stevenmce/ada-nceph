@@ -7,7 +7,7 @@
 #+LATEX_HEADER: \usepackage{pdfpages}
 
 #\clearpage
-* COMMENT graphviz code
+
 #+name:flowdiagram
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
@@ -15,6 +15,12 @@
   # REQUIRES THE DISENTANGLE REPO FROM https://github.com/ivanhanigan/disentangle
   # Clone into a tools directory, or change the following line
   source('~/tools/disentangle/src/newnode.r')
+  
+  userCol <- '#FB8072'
+  userAdminCol <- '#FFFFB3' 
+  dataAdminCol <- '#BEBADA'
+  decisionCol <- 'white'
+  
 #+end_src
 * COMMENT TODOLIST
 ** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
@@ -230,7 +236,7 @@ The "Getting Access" procedure to help users apply for and gain access to mortal
   plot(nodes, nodeAttrs=nA, attrs = attrs)
   legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
          pch = c(21,21,21,22), pt.cex = 1.5,
-         pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', 'white')
+         pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', decisionCol)
          )
   
 #+end_src
@@ -266,7 +272,7 @@ Once a response is received, the User Administrator then enters the relevant inf
   ###########################################################################
   # newnode Manage Access
   
-  nodes <- newnode(name= 'List Current Users',
+  nodes <- newnode(name= 'List Current Users/Files',
                    inputs = c('Modify file access record in ANU-User-DB'),
                    outputs = c('Email Users'),
                    newgraph = T
@@ -287,6 +293,12 @@ Once a response is received, the User Administrator then enters the relevant inf
                    inputs = c('No Change', 'Changed Status'),
                    outputs = c('Write Report',
                    'Modify file access record in ANU-User-DB', 'Review Report'))
+  
+  nodes <- newnode(name= 'Monitor File Server Backups',
+                   inputs = c('List Current Users/Files')
+                   )
+  
+  
 #+end_src
 ** COMMENT add colour
 #+name:add-colour
@@ -304,20 +316,21 @@ Once a response is received, the User Administrator then enters the relevant inf
   #plot(nodes, nodeAttrs=nA, attrs = attrs)
   nodes(nodes)
   # USER
-  nA$fillcolor[nodes(nodes)[4:5]] <- 'lightblue'
+  nA$fillcolor[nodes(nodes)[4:5]] <- userCol
   # USER ADMIN
-  nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- 'darkgrey'
+  nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- userAdminCol
   # DATA ADMIN
-  #nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- 'lightblue'
+  nA$fillcolor[nodes(nodes)[c(11)]] <- dataAdminCol
   # DECISIONS
   dec <- c(6:7)
-  nA$fillcolor[nodes(nodes)[dec]] <- 'white'
+  nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
   nA$shape[nodes(nodes)[dec]] <- 'box'
   
   plot(nodes, nodeAttrs=nA, attrs = attrs)
-  legend('topleft', legend = c('User','User Admin', 'Decision'),
-         pch = c(21,21,22),
-         pt.bg = c('lightblue','darkgrey', 'white')
+  legend('topleft',
+         legend = c('User','User Admin', 'Data Admin', 'Decision'),
+         pch = c(21,21,21,22),
+         pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
          )
   
 #+end_src
@@ -416,6 +429,41 @@ The procedure for ending access aims to ensure that data are both securely and s
                     )
   
 #+end_src
+** COMMENT add colour
+#+name:add-colour
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: test-colour
+  attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+  plot(nodes, attrs = attrs)
+  nNodes <- length(nodes(nodes))
+  nA <- list()
+  nA$fillcolor <- rep('grey', nNodes)
+  nA$shape <- rep("ellipse", nNodes)
+  nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+  #nA
+  #plot(nodes, nodeAttrs=nA, attrs = attrs)
+  nodes(nodes)
+  # USER
+  nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)]] <- userCol
+  # USER ADMIN
+  nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)]] <- userAdminCol
+  # DATA ADMIN
+  nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)]] <- dataAdminCol
+  # DECISIONS
+  dec <- c(6,7,10,11)
+  nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+  nA$shape[nodes(nodes)[dec]] <- 'box'
+  
+  plot(nodes, nodeAttrs=nA, attrs = attrs)
+  legend('topleft',
+         legend = c('User','User Admin', 'Data Admin', 'Decision'),
+         pch = c(21,21,21,22),
+         pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+         )
+  
+#+end_src
+
 ** COMMENT plot nodes
 #+name:plotnodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
@@ -426,9 +474,7 @@ The procedure for ending access aims to ensure that data are both securely and s
   
 #+end_src
 
-
-* Appendices
-** COMMENT plot all nodes
+* COMMENT plot all nodes
 #+begin_src R :session *R* :tangle no :exports none :eval no   
   
   source('DataAccessFlowDiagram.r')
@@ -438,6 +484,8 @@ The procedure for ending access aims to ensure that data are both securely and s
   #dev.off()
   
 #+end_src
+
+* Appendices
 
 ** Details of Steps for Getting Access
 #\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
@@ -463,8 +511,10 @@ The procedure for ending access aims to ensure that data are both securely and s
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
+\includegraphics[width=1.5\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
 \caption{Flow Diagram for Ending Access}
 \label{fig:DataAccessFlowDiagram-EndAccess}
 \end{figure}
 \clearpage
+* Acknowledgments
+We are grateful to the advice of Doug Moncur of the ANU ITS Data Commons group for feed back on this drafts of this document.
