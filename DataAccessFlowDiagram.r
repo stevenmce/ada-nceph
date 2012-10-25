@@ -199,9 +199,8 @@ legend('topleft',
 
 ###########################################################################
 # newnode End Access
-nodes <- newnode(name= 'Query Registered End Dates',
-                 inputs = c('Start Periodic Review'),
-                 outputs = c('Send Prompt to Users'),
+nodes <- newnode(inputs = 'Query Registered End Dates',
+                 name = c('Send Prompt to Users'),
                  newgraph = T)
 
 nodes <- newnode(name= 'User Receives Prompt',
@@ -277,13 +276,13 @@ nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
 #plot(nodes, nodeAttrs=nA, attrs = attrs)
 nodes(nodes)
 # USER
-nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)]] <- userCol
+nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)-1]] <- userCol
 # USER ADMIN
-nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)]] <- userAdminCol
+nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)-1]] <- userAdminCol
 # DATA ADMIN
-nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)]] <- dataAdminCol
+nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)-1]] <- dataAdminCol
 # DECISIONS
-dec <- c(6,7,10,11)
+dec <- c(6,7,10,11)-1
 nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
 nA$shape[nodes(nodes)[dec]] <- 'box'
 
