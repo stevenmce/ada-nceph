@@ -157,7 +157,110 @@ Service to identify deceased persons from your provided client list using RBDM m
 Unit record files with detailed causes of death data are required to produce the appropriately aggregated data with requisite data checking and summarisation statistics for our study designs
 **** Q4b. If you indicated that you require CURF or URF mortality data, could a subset of mortality unit record data (e.g. all records for a specific disease) enable you to conduct your business?
 NO
-
+**** Q4c. If you indicated that you require CURF or URF mortality data, how many staff in your work unit, including you, would need access to the mortality unit record data?
+1
+**** Q4e. If you indicated that you or other staff in your work unit require the URF data, would a cause of death unit record file, which includes only doctor certified unit records and excludes any coroner referred deaths, be useful to your work unit?
+no No - a full cause of death URF with coroner data is required
+**** Q5. Please indicate whether the following data items are essential, desirable, not required or not applicable to your work.
+ 	Essential	Desirable	Not required	Not applicable
+Full date of occurence (e.g. 26/11/1974)	
+Part date of occurence (e.g. November 1974)	
+Reference year	
+Registration date	
+Usual residence SA2 code	
+Usual residence partial address data items (e.g. postcode, region, state)	
+Residency period	
+Place of occurence	
+Place of birth (e.g. country, state or territory)	
+Age	
+Age Essential
+	
+Age Desirable
+	
+Age Not required
+	
+Age Not applicable
+Gender	
+Gender Essential
+	
+Gender Desirable
+	
+Gender Not required
+	
+Gender Not applicable
+Certifer	
+Certifer Essential
+	
+Certifer Desirable
+	
+Certifer Not required
+	
+Certifer Not applicable
+Underlying cause of death	
+Underlying cause of death Essential
+	
+Underlying cause of death Desirable
+	
+Underlying cause of death Not required
+	
+Underlying cause of death Not applicable
+Axis counts (to determine the number of records attached to the underlying cause of death)	
+Axis counts (to determine the number of records attached to the underlying cause of death) Essential
+	
+Axis counts (to determine the number of records attached to the underlying cause of death) Desirable
+	
+Axis counts (to determine the number of records attached to the underlying cause of death) Not required
+	
+Axis counts (to determine the number of records attached to the underlying cause of death) Not applicable
+Martial status	
+Martial status Essential
+	
+Martial status Desirable
+	
+Martial status Not required
+	
+Martial status Not applicable
+Maiden name (if applicable)	
+Maiden name (if applicable) Essential
+	
+Maiden name (if applicable) Desirable
+	
+Maiden name (if applicable) Not required
+	
+Maiden name (if applicable) Not applicable
+Alias names	
+Alias names Essential
+	
+Alias names Desirable
+	
+Alias names Not required
+	
+Alias names Not applicable
+Date of disposal	
+Date of disposal Essential
+	
+Date of disposal Desirable
+	
+Date of disposal Not required
+	
+Date of disposal Not applicable
+Place of disposal (institution)	
+Place of disposal (institution) Essential
+	
+Place of disposal (institution) Desirable
+	
+Place of disposal (institution) Not required
+	
+Place of disposal (institution) Not applicable
+Multiple cause of death codes	
+Multiple cause of death codes Essential
+	
+Multiple cause of death codes Desirable
+	
+Multiple cause of death codes Not required
+	
+Multiple cause of death codes Not applicable
+Other (please specify)
 * Introduction 
 The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 
