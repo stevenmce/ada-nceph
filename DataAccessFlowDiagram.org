@@ -123,7 +123,7 @@ System user logs are kept and regularly monitored NO
 Other (please specify) NO
 **** Q5a. Does your agency have protocols in place in the event of a breach of information privacy, confidentiality or security?
 I don't know
-Q5b. If you answered yes, that your agency has protocols in place, has your agency been required to activate these protocols in the past five years?
+**** Q5b. If you answered yes, that your agency has protocols in place, has your agency been required to activate these protocols in the past five years?
 I don't know
 **** Q6. Does your agency hold any other unit record data for individuals that have identifying information (e.g. name or date of birth)?
 Yes
@@ -163,104 +163,43 @@ NO
 no No - a full cause of death URF with coroner data is required
 **** Q5. Please indicate whether the following data items are essential, desirable, not required or not applicable to your work.
  	Essential	Desirable	Not required	Not applicable
-Full date of occurence (e.g. 26/11/1974)	
+yes Full date of occurence (e.g. 26/11/1974)	
 Part date of occurence (e.g. November 1974)	
-Reference year	
+yes Reference year	
 Registration date	
-Usual residence SA2 code	
-Usual residence partial address data items (e.g. postcode, region, state)	
-Residency period	
-Place of occurence	
-Place of birth (e.g. country, state or territory)	
-Age	
-Age Essential
-	
-Age Desirable
-	
-Age Not required
-	
-Age Not applicable
-Gender	
-Gender Essential
-	
-Gender Desirable
-	
-Gender Not required
-	
-Gender Not applicable
+yes Usual residence SA2 code	
+yes Usual residence partial address data items (e.g. postcode, region, state)	
+yes Residency period	
+yes Place of occurence	
+yes Place of birth (e.g. country, state or territory)	
+yes Age	
+yes Gender	
 Certifer	
-Certifer Essential
-	
-Certifer Desirable
-	
-Certifer Not required
-	
-Certifer Not applicable
-Underlying cause of death	
-Underlying cause of death Essential
-	
-Underlying cause of death Desirable
-	
-Underlying cause of death Not required
-	
-Underlying cause of death Not applicable
-Axis counts (to determine the number of records attached to the underlying cause of death)	
-Axis counts (to determine the number of records attached to the underlying cause of death) Essential
-	
-Axis counts (to determine the number of records attached to the underlying cause of death) Desirable
-	
-Axis counts (to determine the number of records attached to the underlying cause of death) Not required
-	
-Axis counts (to determine the number of records attached to the underlying cause of death) Not applicable
-Martial status	
-Martial status Essential
-	
-Martial status Desirable
-	
-Martial status Not required
-	
-Martial status Not applicable
+yes Underlying cause of death	
+yes Axis counts (to determine the number of records attached to the underlying cause of death)	
+yes Martial status	
 Maiden name (if applicable)	
-Maiden name (if applicable) Essential
-	
-Maiden name (if applicable) Desirable
-	
-Maiden name (if applicable) Not required
-	
-Maiden name (if applicable) Not applicable
 Alias names	
-Alias names Essential
-	
-Alias names Desirable
-	
-Alias names Not required
-	
-Alias names Not applicable
-Date of disposal	
-Date of disposal Essential
-	
-Date of disposal Desirable
-	
-Date of disposal Not required
-	
-Date of disposal Not applicable
-Place of disposal (institution)	
-Place of disposal (institution) Essential
-	
-Place of disposal (institution) Desirable
-	
-Place of disposal (institution) Not required
-	
-Place of disposal (institution) Not applicable
-Multiple cause of death codes	
-Multiple cause of death codes Essential
-	
-Multiple cause of death codes Desirable
-	
-Multiple cause of death codes Not required
-	
-Multiple cause of death codes Not applicable
+yes Date of disposal	
+yes Place of disposal (institution)	
+yes Multiple cause of death codes	
 Other (please specify)
+**** Q6. How do you and staff in your work unit intend to use mortality data? Please select all that apply from the list below. 
+Research using RBDM data to produce aggregate reports.
+Research using RBDM and user's non-identifiable data (e.g. cross referencing with other aggregate data) to produce aggregate reports.
+Research for input into policy development.
+Research for monitoring policy outcomes.
+Research for policy evaluation.
+**** Q7. How do you or staff in your work unit intend to output the findings of mortality data? Please select all that apply from the list below.
+Aggregated reports available in public domain (including reports, submissions, published data tables).
+Other = Peer reviewed journal papers
+
+**** Q8. How often would your work unit require the mortality data to be provided by the registry? If you have need for multiple data sets with different provision requirements, please select all that apply from the list below.   
+Ongoing data required annually
+
+**** Q9. What are your work unit’s mortality data retention requirements? If you have a need for multiple data sets with different retention requirements, please select all that apply.   
+There is an ongoing requirement for use in longitudinal data set/ indefinite retention.
+
 * Introduction 
 The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 
