@@ -5,6 +5,11 @@
 # Clone into a tools directory, or change the following line
 source('~/tools/disentangle/src/newnode.r')
 
+userCol <- '#FB8072'
+userAdminCol <- '#FFFFB3' 
+dataAdminCol <- '#BEBADA'
+decisionCol <- 'white'
+
 ###########################################################################
 # Getting access
 
@@ -13,25 +18,28 @@ nodes <- newnode(name='Browse Catalogue',
                  outputs = 'Request Access',
                  newgraph = T
                  )
-
-nodes <- newnode(name= 'Add Study Description in Registry',
-                inputs='Request Access')
-
 ## NEEDS ETHICS COMMITTEE PROCESS HERE
 
-nodes <- newnode(name='Review Application',
-                 inputs = 'Add Study Description in Registry'
+nodes <- newnode(name= 'Get Ethics Committee Approval',
+                inputs='Request Access',
+                 outputs = 'Ethics Committee Approves Project')
+
+nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
+                inputs= 'Ethics Committee Approves Project'
                  )
 
+nodes <- newnode(name = 'Get BDM Committee Approval',
+                 inputs = 'Add Study Description in ANU-User-DB'
+                 )
 ## INSERT BDM APPROVAL PROCESS HERE
 
 nodes <- newnode(name='Approve Access',
-                 inputs = 'Review Application'
+                 inputs = 'Get BDM Committee Approval'
 
                  )
 
 nodes <- newnode(name='Deny Access',
-                 inputs = 'Review Application'
+                 inputs = 'Get BDM Committee Approval'
 
 )
 
@@ -39,7 +47,7 @@ nodes <- newnode(name='Deny Access',
 
 ###########################################################################
 # Provide data
-# nodes <- newnode(name='Add to Study Description in Registry',
+# nodes <- newnode(name='Add to Study Description in ANU-User-DB',
 #                  inputs='Request Access',
 #                  outputs= 'Review Application',
 #
@@ -49,20 +57,20 @@ nodes <- newnode(name='Deny Access',
 
 nodes <- newnode(name='Notify User of Approval',
                  inputs='Approve Access',
-                 outputs='Add Access Record in Registry',
+                 outputs='Add Access Record in ANU-User-DB',
                  )
 
 # or record why not
 
 nodes <- newnode(name='Notify User of Non-approval',
                  inputs='Deny Access',
-                 outputs='Note Reason in Study Description in Registry',
+                 outputs='Note Reason in Study Description in ANU-User-DB',
                  )
 
 
 
 nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                 inputs = 'Add Access Record in Registry'
+                 inputs = 'Add Access Record in ANU-User-DB'
                  )
 
 
@@ -83,15 +91,44 @@ nodes <- newnode(name = 'High Risk Data', outputs =
                  inputs = 'Store data extract in appropriate location'
                  )
 
-nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+nodes <- newnode(name= 'Add File Record to ANU-User-DB', newgraph = F,
                  inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
 
 
                  outputs = c('Notify User of Access')
 )
 
-nodes <- newnode(name = 'Modify file and access records in registry',
+nodes <- newnode(name = 'Modify file and access records in ANU-User-DB',
                  inputs = 'Notify User of Access')
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[1:4]] <- '#FB8072' #'#8DD3C7'
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- '#FFFFB3'
+# DATA ADMIN
+nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- '#BEBADA'
+# DECISIONS
+dec <- c(5,8:9, 17,19)
+nA$fillcolor[nodes(nodes)[dec]] <- 'white' 
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
+       pch = c(21,21,21,22), pt.cex = 1.5,
+       pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', decisionCol)
+       )
 
 dev.copy2pdf(file='DataAccessFlowDiagram-GettingAccess.pdf')
 dev.off()
@@ -99,8 +136,8 @@ dev.off()
 ###########################################################################
 # newnode Manage Access
 
-nodes <- newnode(name= 'List Current Users',
-                 inputs = c('Modify file access record in registry'),
+nodes <- newnode(name= 'List Current Users/Files',
+                 inputs = c('Modify file access record in ANU-User-DB'),
                  outputs = c('Email Users'),
                  newgraph = T
                  )
@@ -119,7 +156,41 @@ nodes <- newnode(name= 'Report Status',
 nodes <- newnode(name= 'Input Response',
                  inputs = c('No Change', 'Changed Status'),
                  outputs = c('Write Report',
-                 'Modify file access record in registry', 'Review Report'))
+                 'Modify file access record in ANU-User-DB', 'Review Report'))
+
+nodes <- newnode(name= 'Monitor File Server Backups',
+                 inputs = c('List Current Users/Files')
+                 )
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[4:5]] <- userCol
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- userAdminCol
+# DATA ADMIN
+nA$fillcolor[nodes(nodes)[c(11)]] <- dataAdminCol
+# DECISIONS
+dec <- c(6:7)
+nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topleft',
+       legend = c('User','User Admin', 'Data Admin', 'Decision'),
+       pch = c(21,21,21,22),
+       pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+       )
 
 ################################################################
 # name:plotnodes
@@ -128,9 +199,8 @@ nodes <- newnode(name= 'Input Response',
 
 ###########################################################################
 # newnode End Access
-nodes <- newnode(name= 'Query Registered End Dates',
-                 inputs = c('Start Periodic Review'),
-                 outputs = c('Send Prompt to Users'),
+nodes <- newnode(inputs = 'Query Registered End Dates',
+                 name = c('Send Prompt to Users'),
                  newgraph = T)
 
 nodes <- newnode(name= 'User Receives Prompt',
@@ -188,10 +258,40 @@ nodes <- newnode(name= 'User Data Archiving',
                  'User Stores Data and Informs User Admin of Security')
                  )
 
-nodes <-  newnode(name = 'User Admin Records Status',
+nodes <-  newnode(name = 'User Admin Records Status in ANU-User-DB',
                   inputs =
                   'User Stores Data and Informs User Admin of Security'
                   )
+
+###########################################################################
+# newnode: test-colour
+attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+plot(nodes, attrs = attrs)
+nNodes <- length(nodes(nodes))
+nA <- list()
+nA$fillcolor <- rep('grey', nNodes)
+nA$shape <- rep("ellipse", nNodes)
+nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+#nA
+#plot(nodes, nodeAttrs=nA, attrs = attrs)
+nodes(nodes)
+# USER
+nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)-1]] <- userCol
+# USER ADMIN
+nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)-1]] <- userAdminCol
+# DATA ADMIN
+nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)-1]] <- dataAdminCol
+# DECISIONS
+dec <- c(6,7,10,11)-1
+nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+nA$shape[nodes(nodes)[dec]] <- 'box'
+
+plot(nodes, nodeAttrs=nA, attrs = attrs)
+legend('topleft',
+       legend = c('User','User Admin', 'Data Admin', 'Decision'),
+       pch = c(21,21,21,22),
+       pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+       )
 
 ################################################################
 # name:plotnodes

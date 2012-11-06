@@ -1,4 +1,4 @@
-% Created 2012-10-18 Thu 13:03
+% Created 2012-10-25 Thu 22:20
 \documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
@@ -8,8 +8,8 @@
 \usepackage{pdfpages}
 \providecommand{\alert}[1]{\textbf{#1}}
 
-\title{ADA-NCEPH Data Access Procedure}
-\author{Ivan Hanigan and Steven McEachern}
+\title{ADA-NCEPH Proposed Data Access Procedure}
+\author{Ivan Hanigan$^1$ and Steven McEachern$^2$}
 \date{\today}
 \hypersetup{
   pdfkeywords={},
@@ -21,79 +21,109 @@
 \maketitle
 
 % Org-mode is exporting headings to 3 levels.
+\noindent [$^1$]National Centre for Epidemiology and Population Health (NCEPH), ANU \\\ [$^2$]Australian Data Archives (ADA), ANU
 \tableofcontents
 
-\clearpage
-\section{TODOLIST}
-\label{sec-1}
-\subsection{\textbf{TODO} Ivan change registry to ANU-DB}
-\label{sec-1-1}
-\subsection{\textbf{TODO} Ivan send to steve by noon Fri.}
-\label{sec-1-2}
-\subsection{\textbf{TODO} Steve review and comment}
-\label{sec-1-3}
-\subsection{\textbf{TODO} Ivan revise and send to BDM by Wed-ish}
-\label{sec-1-4}
+
+
 \section{Introduction}
-\label{sec-2}
+\label{sec-1}
 
 The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
 
-The following descibes roles and processes for:
+The following descibes procedures and processes for three different agents in the system, with different roles:
 \begin{itemize}
-\item Users
-\item User Admins
-\item Data Admins
+\item Users,
+\item User Administrators, and
+\item Data Administrators.
 \end{itemize}
 
-The User and Data information is stored in a Database at ANU referred to as ANU-DB.
+The User and Data information that is used to control the actions of the system are stored in a Database at ANU referred to as the ANU-User-DB.
+\newpage
 \section{Getting Access}
-\label{sec-3}
+\label{sec-2}
 
-  
-\subsection{Flow Chart of Steps to Get Access}
-\label{sec-3-1}
+The ``Getting Access'' procedure to help users apply for and gain access to mortality data is shown in Figure 1, and a more detailed description of the process is shown in the Appendix, Figure 4. The process is a set of formally defined steps that are designed to move the User through two general stages:
+\begin{itemize}
+\item Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
+\item Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria.
+\end{itemize}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
-\caption{DataAccessFlowDiagram-GettingAccess}
+\includegraphics[width=.9\textwidth]{MortalityWFAccess.png}
+\caption{Flow Diagram of Getting Access}
 \label{fig:DataAccessFlowDiagram-GettingAccess}
 \end{figure}
 \clearpage
 \section{Managing Access}
-\label{sec-4}
-\subsection{Query Lists of Projects and Users}
-\label{sec-4-1}
+\label{sec-3}
 
-This is biannual or annual.
-\subsection{Flow Chart of Steps to Manage Access}
-\label{sec-4-2}
+Procedures for managing access are shown in Figure 2 (and in the Appendix, Figure 5). These activities are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the ``Managing Access'' procedures.
+
+The process is initiated by running a query on the ANU-User-DB to make a list of all Projects and Users, and then each Project is sent a reminder to report any changes in Project Status (sent annually to coincide with a similar reminder sent by the ANU Human Research Ethics Committee). The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
+
+Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then initiate the final ``Ending Access'' process.
 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
-\caption{DataAccessFlowDiagram-ManagingAccess}
+\includegraphics[width=\textwidth]{MortalityManagingAccess.png}
+\caption{Flow Diagram of Managing Access}
 \label{fig:DataAccessFlowDiagram-ManagingAccess}
 \end{figure}
 \clearpage
 \section{Ending Access}
+\label{sec-4}
+
+The procedure for ending access aims to ensure that data are both securely and sustainably stored.  It is very important that files used for authorised projects are never re-used in un-authorised projects, but that future researchers may have the opportunity to create an authorised project and potentially replicate historical analyses.  This is an important part of reproducible research and the robust practice of scientific enquiry.
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{MortalityEndingAccess.png}
+\caption{Flow Diagram for Ending Access}
+\label{fig:DataAccessFlowDiagram-EndAccess}
+\end{figure}
+\clearpage
+\section{Appendices}
 \label{sec-5}
-\subsection{Flow Chart for Ending Access}
+\subsection{Details of Steps for Getting Access}
 \label{sec-5-1}
-\subsection{Flow Chart of Steps to Manage Access}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
+\caption{Detailed Flow Diagram of Getting Access}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+\subsection{Details of Steps to Manage Access}
 \label{sec-5-2}
 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
-\caption{DataAccessFlowDiagram-EndAccess}
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
+\caption{Flow Diagram of Managing Access}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
+\end{figure}
+\clearpage
+\subsection{Details of Steps to End Access}
+\label{sec-5-3}
+
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.5\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
+\caption{Flow Diagram for Ending Access}
 \label{fig:DataAccessFlowDiagram-EndAccess}
 \end{figure}
 \clearpage
-\section{Visualise the Data Access Process}
+\section{Acknowledgments}
 \label{sec-6}
+
+We are grateful to the advice of Doug Moncur of the ANU Data Commons group for feedback on drafts of this document.
 
 \end{document}

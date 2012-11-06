@@ -1,28 +1,14 @@
-#+TITLE:ADA-NCEPH Data Access Procedure 
-#+AUTHOR: Ivan Hanigan and Steven McEachern
+#+TITLE:ADA-NCEPH Proposed Data Access Procedure 
+#+AUTHOR: Ivan Hanigan$^1$ and Steven McEachern$^2$
 #+email: ivan.hanigan@anu.edu.au
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LATEX: \noindent [$^1$]National Centre for Epidemiology and Population Health (NCEPH), ANU \\\ [$^2$]Australian Data Archives (ADA), ANU
 #+LATEX: \tableofcontents
 #+LATEX_HEADER: \usepackage{pdfpages}
 
-\clearpage
-* TODOLIST
-** TODO Ivan change registry to ANU-DB
-** TODO Ivan send to steve by noon Fri.
-** TODO Steve review and comment 
-** TODO Ivan revise and send to BDM by Wed-ish
-* Introduction 
-The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
+#\clearpage
 
-The following descibes roles and processes for:
-- Users
-- User Admins
-- Data Admins
-
-The User and Data information is stored in a Database at ANU referred to as ANU-DB.
-
-* COMMENT graphviz code
 #+name:flowdiagram
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
@@ -30,8 +16,235 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
   # REQUIRES THE DISENTANGLE REPO FROM https://github.com/ivanhanigan/disentangle
   # Clone into a tools directory, or change the following line
   source('~/tools/disentangle/src/newnode.r')
+  
+  userCol <- '#FB8072'
+  userAdminCol <- '#FFFFB3' 
+  dataAdminCol <- '#BEBADA'
+  decisionCol <- 'white'
+  
 #+end_src
+* COMMENT TODOLIST
+** TODO Ivan send graphivis lowlevel versions to Steve by noon Fri (also NCEPH policy)
+** TODO Steve review and comment
+** TODO Ivan to revise lucidchart highlevel version on Mon-Tues
+** TODO Ivan finalise and send to BDM by Wed-ish, CC Steve
+** TODO Ivan Test BDM survey
+*** intro
+From: Jo-Marie Moore [jo.moore@abs.gov.au]
+Sent: 23 October 2012 16:31
+To: Ivan Hanigan
+Subject: RE: Registry of Births, Deaths and Marriages User Survey testing [SEC=UNCLASSIFIED]
+
+Hi Ivan,
+
+The Registry User survey is ready for testing.  The survey covers COD data, but also Registry data more generally.  Once tested it will be sent to all our Registry data users (in all States and Territories) and those on our COD URF communications register.
+*** survey
+Please follow the link and complete the survey as if you were really responding on behalf of your agency.  
+https://www.surveymonkey.com/s/registrydatasurvey
+*** QA
+Please remember to record the following:
+1. How long it the survey took to complete.
+35 minutes
+
+2. Would you know who you should also forward the survey onto within your agency and who would you forward this to outside of your agency (if any).
+Deputy Director at the Australian Data Archives, the Data Manager at the Australian Demographic and Social Research Intitute, the Data Manager at the Centre for Mental Health Research, The Population Health Research Network, the Secure Unified Research Environment (SURE) team at the Sax Institute.
+
+3. If any of the questions did not make sense (if you think this is going to have a major impact on our survey results, if you have any suggested improvements for the question)
+
+Q4.4 Agency has organisational legislative protections for the access and use of data
+The University has a policy called the 'Responsible Practice of Research' which makes statements about appropriate access and use of data, and that references the NHMRC guidelines on human research.  Not sure if this counts as organisational legislation though?
+4.6 Restricted access to data store or IT access approval process.
+perhaps 'is access to the data store restricted with IT access approval processes in place?'
+4.9 in secure remote server environments the passes would be worn by IT infrastructure staff, the researchers in a different building would not need these but do work in locked rooms and password protected computers.  I answered for the researchers, but out IT Infrastructure server room is swipecard entry only.
+4.10 ANU operates a virtual machine (VM) cluster which means that individual servers (VMs) are connected.  They operate like seperate computers so I answered yes.
+
+
+4. Any spelling or other errors
+Q6.9 To make aggregate dta tables available publicly
+should be data
+
+5. Any other suggestions you have as you work through the survey
+No
+
+*** respond
+Please let me know by email to both my QLD Registry and ABS email addresses when you have completed the survey, so we can also test running aggregated reports.  
+
+We would really appreciate your feedback as soon as possible.
+
+Thanks
+
+Jo-Marie Moore
+
+Assistant Director
+
+(Please note: I work Tuesday at the ABS and Monday, Wednesday-Friday at the QLD Registry of Births, Deaths and Marriages)
+
+Outposted Officer - QLD Births, Deaths and Marriages  |  Health & Vitals Branch  |  Australian Bureau of Statistics
+
+(P) (07) 3222 6080   (M) 0437 1343 77  (F) (07) 3222 6299
+
+(E) jo.moore@abs.gov.au  (W)  www.abs.gov.au
+
+NatStats 2013 Conference, Brisbane Convention and Exhibition Centre, 12-14 March 2013
+Early bird registrations close 31 October 2012
+www.nss.gov.au/blog/natstats.nsf 
+
+** TODO do proper Survey
+Your assistance is needed to shape the availability of births, deaths and marriages data in Australia
+
+The Registries of Births, Deaths and Marriages (RBDMs) invite you to complete the 2012 registry data users' survey. https://www.surveymonkey.com/s/registrydatasurvey 
+
+The results of this survey will help the Registries to understand your workplace's current and ongoing data requirements and to define a new set of processes for those interested in accessing registry data.
+
+We are looking for independent researchers and agency work units to complete the survey. In the case of agency work units, we ask that you provide one coordinated response on behalf of all of the researchers in your work unit.
+
+Please help us to gain a wide range of responses by forwarding this email to anyone you know who is likely to require registry data in the future.
+
+Access to the survey will be available until the 8th of November 2012. Please ensure you complete the survey on or before this date.
+
+Thank you for your assistance. If you have any questions about the survey, contact the Queensland RBDM by email.
+ 
+
+Regards,
+National Data Management Framework Project Team
+
+*** Section 2 - Agency questions
+**** Q1. Which type of agency do you currently work at? If you work across multiple agencies please provide responses on behalf of the agency where you most frequently use registry data.
+Univeristy - research team
+**** Q2a. Does your agency have a central coordination point for managing administrative data sets (data sets not generated by your own agency) that can manage Registry data?
+Yes
+
+
+**** Q2b. If you answered yes, that your agency has a central coordination point, please provide the following contact details for the coordination point:
+Contact name: Dr Steven McEachern	
+Position title:	
+Telephone number:	02 6125 2200
+Email address:	
+etc etc
+
+**** Q2c. If you answered no, that your agency does not have a central coordination point, please explain how access is shared between researchers within the same agency?
+
+**** Q3. Will you or other researchers in your agency be seeking access to unit record files held by the registries within the next twelve months?
+yes
+**** Q4. What security measures does your work unit have in place for holding personally identifiable or other sensitive information? Please select all that apply from the list below.
+Agency applies confidentiality rules before publishing data YES
+Agency has data management policies in place YES
+Agency has mechanisms to enforce penalties for breaches of data security, confidentiality or privacy YES
+Agency has organisational legislative protections for the access and use of data NO
+Persons accessing data must be physically on-site NO 
+Restricted access to data store or IT access approval process YES
+Restricted building access YES
+Secure IT password environments YES
+Security ID passess worn by staff NO
+Separate servers for holding administrative data YES
+System user logs are kept and regularly monitored NO
+Other (please specify) 
+http://policies.anu.edu.au/policies/information_infrastructure_security/policy The University Information Technology Services Rules, Discipline Rules and relevant industrial awards contain provisions that will be used to deal with users in breach of this policy.
+**** Q5a. Does your agency have protocols in place in the event of a breach of information privacy, confidentiality or security?
+Yes
+**** Q5b. If you answered yes, that your agency has protocols in place, has your agency been required to activate these protocols in the past five years?
+I don't know
+**** Q6. Does your agency hold any other unit record data for individuals that have identifying information (e.g. name or date of birth)?
+Yes
+**** Q7. Do you intend to link, combine, match, compare or cross-reference registry data with any other unit record data (including other registry data already held)?
+No
+**** Q8. Are there any measures in place that prevent unit record data, held by your agency, from being linked to data provided by the Registry?   
+Yes (please specify)
+Please specify 
+Secure data procedures and project level approval of study design and ethical conduct
+**** Q9. Do you have an affiliation with another agency not listed in Q1? Please select all that apply from the list below.
+State health agency
+Local or state government agency (excluding state health agencies)
+Federal government agency
+Non-government agency (NGA) with multiple researchers using registry data
+Non-government agency (NGA) as sole researcher using registry data
+University - researcher working on individual project
+University - research team
+Other (please specify)
+ 
+*** Section 3 - Mortality data
+**** Q2. Please provide a brief explanation as to why you require mortality data. 
+A copy of the historical de-identified mortality unit record database (1964-2007) has been held by the Centre for many years, and provides a valuable resource for the research activities of the Centre.  We aim to continue to build on this database to enable analyses of the historical mortality trends and patterns in Australia as part of our ongoing program of teaching and research in public health; ultimately informing policies that will support Australian public health.
+**** Q3b. If you indicated that your work unit would require a national file, please provide an explanation of why national data is required. 
+The diverse research questions addressed by the Epidemiologists at the Centre cover the entire country. 
+**** Q4a. What type of mortality information or service do you require in your work unit? Please select all that apply from the list below.
+Summary or aggregate data NO
+Confidentalised Unit Record File (CURF) (micro data that has had identifers removed and/or has been modified to protect individuals from identification) (please explain below why you need this data) NO
+Unit Record File (URF) (micro data that contains identifiable information about individuals, including Cause of Death and Fact of Death data sets) (please explain below why you need this data) YES
+Service to identify deceased persons from your provided client list using RBDM mortality data NO
+
+Unit record files with detailed causes of death data are required to produce the appropriately aggregated data with requisite data checking and summarisation statistics for our study designs
+**** Q4b. If you indicated that you require CURF or URF mortality data, could a subset of mortality unit record data (e.g. all records for a specific disease) enable you to conduct your business?
+NO
+**** Q4c. If you indicated that you require CURF or URF mortality data, how many staff in your work unit, including you, would need access to the mortality unit record data?
+I don't know
+**** Q4e. If you indicated that you or other staff in your work unit require the URF data, would a cause of death unit record file, which includes only doctor certified unit records and excludes any coroner referred deaths, be useful to your work unit?
+no No - a full cause of death URF with coroner data is required
+**** Q5. Please indicate whether the following data items are essential, desirable, not required or not applicable to your work.
+ 	Essential	Desirable	Not required	Not applicable
+yes Full date of occurence (e.g. 26/11/1974)	
+Part date of occurence (e.g. November 1974)	
+yes Reference year	
+Registration date	
+yes Usual residence SA2 code	
+yes Usual residence partial address data items (e.g. postcode, region, state)	
+yes Residency period	
+yes Place of occurence	
+yes Place of birth (e.g. country, state or territory)	
+yes Age	
+yes Gender	
+Certifer	
+yes Underlying cause of death	
+yes Axis counts (to determine the number of records attached to the underlying cause of death)	
+yes Martial status	
+Maiden name (if applicable)	
+Alias names	
+yes Date of disposal	
+yes Place of disposal (institution)	
+yes Multiple cause of death codes	
+Other (please specify)
+**** Q6. How do you and staff in your work unit intend to use mortality data? Please select all that apply from the list below. 
+Research using RBDM data to produce aggregate reports.
+Research using RBDM and user's non-identifiable data (e.g. cross referencing with other aggregate data) to produce aggregate reports.
+Research for input into policy development.
+Research for monitoring policy outcomes.
+Research for policy evaluation.
+**** Q7. How do you or staff in your work unit intend to output the findings of mortality data? Please select all that apply from the list below.
+Aggregated reports available in public domain (including reports, submissions, published data tables).
+Other = Peer reviewed journal papers
+
+**** Q8. How often would your work unit require the mortality data to be provided by the registry? If you have need for multiple data sets with different provision requirements, please select all that apply from the list below.   
+Ongoing data required annually
+
+**** Q9. What are your work unit’s mortality data retention requirements? If you have a need for multiple data sets with different retention requirements, please select all that apply.   
+There is an ongoing requirement for use in longitudinal data set/ indefinite retention.
+
+* Introduction 
+The aim of this document is to describe the procedure for accessing restricted health data through the proposed ANU Secure Data Hub, administered by the ADA and NCEPH.
+
+The following descibes procedures and processes for three different agents in the system, with different roles:
+- Users,
+- User Administrators, and 
+- Data Administrators.
+
+The User and Data information that is used to control the actions of the system are stored in a Database at ANU referred to as the ANU-User-DB.
+\newpage
+
 * Getting Access
+The "Getting Access" procedure to help users apply for and gain access to mortality data is shown in Figure 1, and a more detailed description of the process is shown in the Appendix, Figure 4. The process is a set of formally defined steps that are designed to move the User through two general stages:
+- Requesting data: guiding the researcher through the process of (a) gaining Ethics Approval from a Human Research Ethics Committee, and (b) Project Level Approval from the Registrar of Births, Deaths and Marriages.
+- Providing data: provision of a confidentialised (often aggregated) dataset in an appropriately secured manner such as access to remote secure servers or encrypted archives accessed on local disk media, with security determined by (a) the nature of the data and (b) any project management related criteria.
+
+#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.9\textwidth]{MortalityWFAccess.png}
+\caption{Flow Diagram of Getting Access}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
   ###########################################################################
   # Getting access
@@ -41,21 +254,28 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
                    outputs = 'Request Access',
                    newgraph = T
                    )
+  ## NEEDS ETHICS COMMITTEE PROCESS HERE
   
-  nodes <- newnode(name= 'Add Study Description in Registry',
-                  inputs='Request Access')
+  nodes <- newnode(name= 'Get Ethics Committee Approval',
+                  inputs='Request Access',
+                   outputs = 'Ethics Committee Approves Project')
   
-  nodes <- newnode(name='Review Application',
-                   inputs = 'Add Study Description in Registry'
+  nodes <- newnode(name= 'Add Study Description in ANU-User-DB',
+                  inputs= 'Ethics Committee Approves Project'
                    )
   
+  nodes <- newnode(name = 'Get BDM Committee Approval',
+                   inputs = 'Add Study Description in ANU-User-DB'
+                   )
+  ## INSERT BDM APPROVAL PROCESS HERE
+  
   nodes <- newnode(name='Approve Access',
-                   inputs = 'Review Application'
+                   inputs = 'Get BDM Committee Approval'
   
                    )
   
   nodes <- newnode(name='Deny Access',
-                   inputs = 'Review Application'
+                   inputs = 'Get BDM Committee Approval'
   
   )
   
@@ -63,7 +283,7 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
   
   ###########################################################################
   # Provide data
-  # nodes <- newnode(name='Add to Study Description in Registry',
+  # nodes <- newnode(name='Add to Study Description in ANU-User-DB',
   #                  inputs='Request Access',
   #                  outputs= 'Review Application',
   #
@@ -73,20 +293,20 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
   
   nodes <- newnode(name='Notify User of Approval',
                    inputs='Approve Access',
-                   outputs='Add Access Record in Registry',
+                   outputs='Add Access Record in ANU-User-DB',
                    )
   
   # or record why not
   
   nodes <- newnode(name='Notify User of Non-approval',
                    inputs='Deny Access',
-                   outputs='Note Reason in Study Description in Registry',
+                   outputs='Note Reason in Study Description in ANU-User-DB',
                    )
   
   
   
   nodes <- newnode(name='Give access to Restricted Server', newgraph = F,
-                   inputs = 'Add Access Record in Registry'
+                   inputs = 'Add Access Record in ANU-User-DB'
                    )
   
   
@@ -107,17 +327,51 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
                    inputs = 'Store data extract in appropriate location'
                    )
   
-  nodes <- newnode(name= 'Add File Record to Registry', newgraph = F,
+  nodes <- newnode(name= 'Add File Record to ANU-User-DB', newgraph = F,
                    inputs = c('CSV', 'Database schema', 'Rstudio user workspace'),
   
   
                    outputs = c('Notify User of Access')
   )
   
-  nodes <- newnode(name = 'Modify file and access records in registry',
+  nodes <- newnode(name = 'Modify file and access records in ANU-User-DB',
                    inputs = 'Notify User of Access')
   
 #+end_src  
+** COMMENT add colour
+#+name:add-colour
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: test-colour
+  attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+  plot(nodes, attrs = attrs)
+  nNodes <- length(nodes(nodes))
+  nA <- list()
+  nA$fillcolor <- rep('grey', nNodes)
+  nA$shape <- rep("ellipse", nNodes)
+  nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+  #nA
+  #plot(nodes, nodeAttrs=nA, attrs = attrs)
+  nodes(nodes)
+  # USER
+  nA$fillcolor[nodes(nodes)[1:4]] <- '#FB8072' #'#8DD3C7'
+  # USER ADMIN
+  nA$fillcolor[nodes(nodes)[c(6:7,10:13, 22:24)]] <- '#FFFFB3'
+  # DATA ADMIN
+  nA$fillcolor[nodes(nodes)[c(14:16, 18, 20, 21)]] <- '#BEBADA'
+  # DECISIONS
+  dec <- c(5,8:9, 17,19)
+  nA$fillcolor[nodes(nodes)[dec]] <- 'white' 
+  nA$shape[nodes(nodes)[dec]] <- 'box'
+  
+  plot(nodes, nodeAttrs=nA, attrs = attrs)
+  legend('topleft', legend = c('User','User Admin', 'Data Admin','Decision'),
+         pch = c(21,21,21,22), pt.cex = 1.5,
+         pt.bg = c('#FB8072', '#FFFFB3', '#BEBADA', decisionCol)
+         )
+  
+#+end_src
+
 ** COMMENT plot nodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r  :exports none :eval no   
     
@@ -125,25 +379,32 @@ The User and Data information is stored in a Database at ANU referred to as ANU-
   dev.off()
     
 #+end_src
-** Flow Chart of Steps to Get Access
-#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+
+
+* Managing Access
+Procedures for managing access are shown in Figure 2 (and in the Appendix, Figure 5). These activities are intended to maintain information on the current state of projects using the mortality data, and to report any changes in situation to the State Registries. The User Administrator is responsible for conduct of the "Managing Access" procedures.
+
+The process is initiated by running a query on the ANU-User-DB to make a list of all Projects and Users, and then each Project is sent a reminder to report any changes in Project Status (sent annually to coincide with a similar reminder sent by the ANU Human Research Ethics Committee). The purpose of these reminders is to ensure that Project management plans continue to consider data security as a primary concern, even during long multi-year projects where many project management and staffing issues inevitably arise.
+
+Once a response is received, the User Administrator then enters the relevant information into the ANU-User-DB, and if the project has been concluded will then initiate the final "Ending Access" process.
+
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
-\caption{DataAccessFlowDiagram-GettingAccess}
-\label{fig:DataAccessFlowDiagram-GettingAccess}
+\includegraphics[width=\textwidth]{MortalityManagingAccess.png}
+\caption{Flow Diagram of Managing Access}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
 \end{figure}
 \clearpage
 
-* Managing Access
-** Query Lists of Projects and Users
-This is biannual or annual.
+
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no 
   ###########################################################################
   # newnode Manage Access
   
-  nodes <- newnode(name= 'List Current Users',
-                   inputs = c('Modify file access record in registry'),
+  nodes <- newnode(name= 'List Current Users/Files',
+                   inputs = c('Modify file access record in ANU-User-DB'),
                    outputs = c('Email Users'),
                    newgraph = T
                    )
@@ -162,37 +423,83 @@ This is biannual or annual.
   nodes <- newnode(name= 'Input Response',
                    inputs = c('No Change', 'Changed Status'),
                    outputs = c('Write Report',
-                   'Modify file access record in registry', 'Review Report'))
+                   'Modify file access record in ANU-User-DB', 'Review Report'))
+  
+  nodes <- newnode(name= 'Monitor File Server Backups',
+                   inputs = c('List Current Users/Files')
+                   )
+  
+  
 #+end_src
+** COMMENT add colour
+#+name:add-colour
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: test-colour
+  attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+  plot(nodes, attrs = attrs)
+  nNodes <- length(nodes(nodes))
+  nA <- list()
+  nA$fillcolor <- rep('grey', nNodes)
+  nA$shape <- rep("ellipse", nNodes)
+  nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+  #nA
+  #plot(nodes, nodeAttrs=nA, attrs = attrs)
+  nodes(nodes)
+  # USER
+  nA$fillcolor[nodes(nodes)[4:5]] <- userCol
+  # USER ADMIN
+  nA$fillcolor[nodes(nodes)[c(1:3,8:10)]] <- userAdminCol
+  # DATA ADMIN
+  nA$fillcolor[nodes(nodes)[c(11)]] <- dataAdminCol
+  # DECISIONS
+  dec <- c(6:7)
+  nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+  nA$shape[nodes(nodes)[dec]] <- 'box'
+  
+  plot(nodes, nodeAttrs=nA, attrs = attrs)
+  legend('topleft',
+         legend = c('User','User Admin', 'Data Admin', 'Decision'),
+         pch = c(21,21,21,22),
+         pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+         )
+  
+#+end_src
+
 ** COMMENT plot nodes
 #+name:plotnodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
-################################################################
-# name:plotnodes
-    dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
-    dev.off()
-
+  ################################################################
+  # name:plotnodes
+      dev.copy2pdf(file='DataAccessFlowDiagram-ManagingAccess.pdf')
+      dev.off()
+  
 #+end_src
 
-** Flow Chart of Steps to Manage Access
+
+** COMMENT TODOs
+*** TODO consider the role of the reports
+Doug Moncur said "Do you wish users to have to submit a formal progress report and make continued access contingent
+on an approved report ?
+Question – who then approves the progress/status reports ?"
+* Ending Access
+The procedure for ending access aims to ensure that data are both securely and sustainably stored.  It is very important that files used for authorised projects are never re-used in un-authorised projects, but that future researchers may have the opportunity to create an authorised project and potentially replicate historical analyses.  This is an important part of reproducible research and the robust practice of scientific enquiry.
+
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
-\caption{DataAccessFlowDiagram-ManagingAccess}
-\label{fig:DataAccessFlowDiagram-ManagingAccess}
+\includegraphics[width=\textwidth]{MortalityEndingAccess.png}
+\caption{Flow Diagram for Ending Access}
+\label{fig:DataAccessFlowDiagram-EndAccess}
 \end{figure}
 \clearpage
 
-
-* Ending Access
-** Flow Chart for Ending Access
+** COMMENT src
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no   
   ###########################################################################
   # newnode End Access
-  nodes <- newnode(name= 'Query Registered End Dates',
-                   inputs = c('Start Periodic Review'),
-                   outputs = c('Send Prompt to Users'),
+  nodes <- newnode(inputs = 'Query Registered End Dates',
+                   name = c('Send Prompt to Users'),
                    newgraph = T)
   
   nodes <- newnode(name= 'User Receives Prompt',
@@ -250,12 +557,47 @@ This is biannual or annual.
                    'User Stores Data and Informs User Admin of Security')
                    )
   
-  nodes <-  newnode(name = 'User Admin Records Status',
+  nodes <-  newnode(name = 'User Admin Records Status in ANU-User-DB',
                     inputs =
                     'User Stores Data and Informs User Admin of Security'
                     )
   
 #+end_src
+** COMMENT add colour
+#+name:add-colour
+#+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
+  ###########################################################################
+  # newnode: test-colour
+  attrs <- list(node=list(shape="ellipse", fixedsize=FALSE))
+  plot(nodes, attrs = attrs)
+  nNodes <- length(nodes(nodes))
+  nA <- list()
+  nA$fillcolor <- rep('grey', nNodes)
+  nA$shape <- rep("ellipse", nNodes)
+  nA <- lapply(nA, function(x) { names(x) <- nodes(nodes); x})
+  #nA
+  #plot(nodes, nodeAttrs=nA, attrs = attrs)
+  nodes(nodes)
+  # USER
+  nA$fillcolor[nodes(nodes)[c(4:5,8,12,21,22,23)-1]] <- userCol
+  # USER ADMIN
+  nA$fillcolor[nodes(nodes)[c(1:3,15:17, 20,24)-1]] <- userAdminCol
+  # DATA ADMIN
+  nA$fillcolor[nodes(nodes)[c(9,13,14,18,19)-1]] <- dataAdminCol
+  # DECISIONS
+  dec <- c(6,7,10,11)-1
+  nA$fillcolor[nodes(nodes)[dec]] <- decisionCol
+  nA$shape[nodes(nodes)[dec]] <- 'box'
+  
+  plot(nodes, nodeAttrs=nA, attrs = attrs)
+  legend('topleft',
+         legend = c('User','User Admin', 'Data Admin', 'Decision'),
+         pch = c(21,21,21,22),
+         pt.bg = c(userCol, userAdminCol, dataAdminCol, decisionCol)
+         )
+  
+#+end_src
+
 ** COMMENT plot nodes
 #+name:plotnodes
 #+begin_src R :session *R* :tangle DataAccessFlowDiagram.r :exports none :eval no
@@ -266,19 +608,7 @@ This is biannual or annual.
   
 #+end_src
 
-** Flow Chart of Steps to Manage Access
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
-\caption{DataAccessFlowDiagram-EndAccess}
-\label{fig:DataAccessFlowDiagram-EndAccess}
-\end{figure}
-\clearpage
-
-* Visualise the Data Access Process
-
-** COMMENT plot nodes
+* COMMENT plot all nodes
 #+begin_src R :session *R* :tangle no :exports none :eval no   
   
   source('DataAccessFlowDiagram.r')
@@ -288,3 +618,37 @@ This is biannual or annual.
   #dev.off()
   
 #+end_src
+
+* Appendices
+
+** Details of Steps for Getting Access
+#\includepdf{DataAccessFlowDiagram-GettingAccess.pdf}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-GettingAccess.pdf}
+\caption{Detailed Flow Diagram of Getting Access}
+\label{fig:DataAccessFlowDiagram-GettingAccess}
+\end{figure}
+\clearpage
+** Details of Steps to Manage Access
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.4\textwidth]{DataAccessFlowDiagram-ManagingAccess.pdf}
+\caption{Flow Diagram of Managing Access}
+\label{fig:DataAccessFlowDiagram-ManagingAccess}
+\end{figure}
+\clearpage
+
+** Details of Steps to End Access
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.5\textwidth]{DataAccessFlowDiagram-EndAccess.pdf}
+\caption{Flow Diagram for Ending Access}
+\label{fig:DataAccessFlowDiagram-EndAccess}
+\end{figure}
+\clearpage
+* Acknowledgments
+We are grateful to the advice of Doug Moncur of the ANU Data Commons group for feedback on drafts of this document.
